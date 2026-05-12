@@ -4,7 +4,7 @@ import { Phone, FileText, Award } from "lucide-react"; //
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-white py-20 px-[40px]">
+    <section className="bg-white py-20 px-10">
       <div className="max-w-360 mx-auto relative">
         
         {/* Main Container */}
@@ -14,7 +14,7 @@ export default function WhyChooseUs() {
         >
           {/* Left Side: Factory Image */}
           <div className="relative w-full md:w-1/2 min-h-100">
-            <div className="bg-white h-[70px]  w-[40px] absolute top-[-10] z-100 rounded-2xl">
+            <div className="bg-white h-17.5  w-10 absolute top-[-10] z-100 rounded-2xl">
 
             </div>
             <Image

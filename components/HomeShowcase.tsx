@@ -24,7 +24,7 @@ export default function HeroCarousel() {
   }, [emblaApi, onSelect]);
 
   return (
-    <div className="relative h-[700px] w-full overflow-hidden bg-gray-900 text-white " >
+    <div className="relative h-175 w-full overflow-hidden bg-gray-900 text-white " >
       {/* Viewport */}
       <div className="h-full overflow-hidden" ref={emblaRef}>
         <div className="flex h-full">
