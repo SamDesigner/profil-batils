@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
-import { Phone, FileText, Award } from "lucide-react"; //
+import { Phone, FileText, Award } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function WhyChooseUs() {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-white py-20   md:px-10">
       <div className="max-w-360 mx-auto relative">
@@ -32,7 +37,7 @@ export default function WhyChooseUs() {
                 </div>
                 <div className="text-right">
                   <p className="text-4xl font-bold text-black leading-none">300+</p>
-                  <p className="text-sm font-semibold text-black/70">Collaborations</p>
+                  <p className="text-sm font-semibold text-black/70">{t('contractors.collaborations')}</p>
                 </div>
               </div>
               
@@ -40,7 +45,7 @@ export default function WhyChooseUs() {
                 {/* Optional: Add a subtle map SVG overlay here to match your image */} 
                 <Image src='/images/MapSvg.svg' className="absolute top-[-200]" alt="Map Image" height={250} width={250} />
                 <p className="text-xl font-bold text-black leading-tight">
-                  Trusted Manufacturer <br /> in the CEMAC Region
+                  {t('contractors.trusted')}
                 </p>
               </div>
             </div>
@@ -60,11 +65,10 @@ export default function WhyChooseUs() {
 
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                Why Contractors and <br /> Distributors Choose us?
+                {t('contractors.title')}
               </h2>
               <p className="text-gray-600 mb-10 leading-relaxed max-w-md">
-                At Bati Profils, we combine advanced manufacturing, precision engineering, and 
-                strict quality control to deliver durable and efficient drywall profile systems.
+                {t('contractors.description')}
               </p> 
 
               {/* Action Buttons */}
@@ -73,14 +77,14 @@ export default function WhyChooseUs() {
                   <div className="bg-black text-white p-1 rounded-full">
                     <Phone size={14} fill="currentColor" />
                   </div>
-                  Call our Factory
+                  {t('contractors.callFactory')}
                 </button>
 
                 <button className="flex items-center gap-3 bg-[#262626] hover:bg-black text-white font-bold py-4 px-8 rounded-xl transition-all">
                   <div className="bg-white text-black p-1 rounded-full">
                     <FileText size={14} fill="currentColor" />
                   </div>
-                  Download Catalogue
+                  {t('contractors.downloadCatalogue')}
                 </button>
               </div>
             </div>

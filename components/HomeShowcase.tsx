@@ -1,16 +1,18 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const SLIDES = [
-  { title: "Smart Solutions For Modern Systems.", image: '/images/showcaseOne.png' },
-  { title: "Innovative Engineering for Global Trade.", image: "https://images.unsplash.com/photo-1777446039915-96505c45ca99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8" },
-  { title: "Sustainable Local Development.", image: "https://images.unsplash.com/photo-1777446039915-96505c45ca99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8" },
+  { titleKey: "showcase.title1", image: '/images/showcaseOne.png' },
+  { titleKey: "showcase.title2", image: "https://images.unsplash.com/photo-1777446039915-96505c45ca99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8" },
+  { titleKey: "showcase.title3", image: "https://images.unsplash.com/photo-1777446039915-96505c45ca99?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw0fHx8ZW58MHx8fHx8" },
 ];
 
 export default function HeroCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const { t } = useLanguage();
 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
@@ -37,19 +39,18 @@ export default function HeroCarousel() {
               <div className="max-w-7xl mx-auto h-full px-6 sm:px-12 md:px-12 flex items-center">
                 <div className="relative z-10 flex flex-col justify-center">
                   <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
-                    {slide.title}
+                    {t(slide.titleKey)}
                   </h1>
                   <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-8 max-w-xl leading-relaxed">
-                    We help transform global opportunities into sustainable local development, 
-                    from international trade to investment funding and full turnkey project delivery.
+                    {t('showcase.description')}
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button className="bg-yellow-400 text-black px-8 py-3 rounded-md font-semibold hover:bg-yellow-500 transition text-center shadow-lg">
-                      Explore our Projects
+                      {t('showcase.exploreProjects')}
                     </button>
                     <button className="bg-[#1a1c1e] text-white px-8 py-3 rounded-md font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:bg-black transition-all">
-                      Get in Touch 
+                      {t('showcase.getInTouch')}
                     </button>
                   </div>
                 </div>

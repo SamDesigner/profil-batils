@@ -1,31 +1,39 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-
-const ABOUT_DATA = {
-  profile: {
-    title: "Bati Profils Ltd.",
-    description: `Bati Profils is a modern manufacturing company specializing in drywall profile systems. With advanced production technology and a skilled team, we deliver high-quality, durable, and cost-effective solutions tailored to the construction industry. Based in Douala, we are committed to serving Cameroon and the wider Central African market with reliable and innovative building systems.`,
-  },
-  gallery: { title: "Factory Gallery", description: "Explore our state-of-the-art production facility and advanced machinery." },
-  certifications: { title: "Our Certifications", description: "Our commitment to quality is backed by international industry standards." }
-};
-type TabKey = keyof typeof ABOUT_DATA;
-const FEATURES = [
-  { icon: "🌍", label: "Fast delivery across Africa", color: "bg-[#FFF9E5]" },
-  { icon: "🤝", label: "5000+ Satisfied Customers", color: "bg-[#FFF9E5]" },
-  { icon: "⏰", label: "20+ years Industry Experience", color: "bg-[#FFCC29]" },
-  { icon: "👷", label: "100+ Employee Count", color: "bg-[#FFF9E5]" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutUs() {
-  const [activeTab, setActiveTab] = useState<TabKey>("profile");
+  const [activeTab, setActiveTab] = useState<"profile" | "gallery" | "certifications">("profile");
+  const { t } = useLanguage();
+
+  const ABOUT_DATA = {
+    profile: {
+      titleKey: "about.profile",
+      descriptionKey: "about.description",
+    },
+    gallery: {
+      titleKey: "about.gallery",
+      descriptionKey: "about.galleryDesc",
+    },
+    certifications: {
+      titleKey: "about.certifications",
+      descriptionKey: "about.certDesc",
+    }
+  };
+
+  const FEATURES = [
+    { icon: "🌍", labelKey: "about.feature1", color: "bg-[#FFF9E5]" },
+    { icon: "🤝", labelKey: "about.feature2", color: "bg-[#FFF9E5]" },
+    { icon: "⏰", labelKey: "about.feature3", color: "bg-[#FFCC29]" },
+    { icon: "👷", labelKey: "about.feature4", color: "bg-[#FFF9E5]" },
+  ];
 
   return (
     <section className="bg-white py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-center text-xl font-bold uppercase tracking-widest mb-16 text-gray-900">
-          About Us
+          {t('about.title')}
         </h2>
 
         <div className="flex flex-col lg:flex-row gap-12 items-start">
@@ -45,18 +53,17 @@ export default function AboutUs() {
           <div className="w-full lg:w-5/12 flex flex-col">
             {/* Tabs Navigation */}
             <div className="flex border-b border-gray-300 mb-8 relative">
-              {["profile", "factory gallery", "certifications"].map((tab) => {
-                const key = tab === "factory gallery" ? "gallery" : tab === "profile" ? "profile" : "certifications";
-                const isActive = activeTab === key;
+              {(["profile", "gallery", "certifications"] as const).map((tabKey) => {
+                const isActive = activeTab === tabKey;
                 return (
                   <button
-                    key={key}
-                    onClick={() => setActiveTab(key)}
+                    key={tabKey}
+                    onClick={() => setActiveTab(tabKey)}
                     className={`flex-1 py-3 px-2 text-sm font-semibold transition-all duration-300 capitalize ${
                       isActive ? "bg-[#FFCC29] shadow-[4px_-4px_10px_rgba(0,0,0,0.1)] rounded-t-lg text-black z-10" : "text-gray-500 hover:text-black"
                     }`}
                   >
-                    {tab}
+                    {t(ABOUT_DATA[tabKey].titleKey)}
                   </button>
                 );
               })}
@@ -65,15 +72,15 @@ export default function AboutUs() {
             {/* Dynamic Content */}
             <div className="min-h-[250px]">
               <h3 className="text-xl font-bold mb-4 text-gray-900">
-                {ABOUT_DATA[activeTab].title}
+                {t(ABOUT_DATA[activeTab].titleKey)}
               </h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                {ABOUT_DATA[activeTab].description}
+                {t(ABOUT_DATA[activeTab].descriptionKey)}
               </p>
             </div>
 
             <button className="mt-8 bg-[#262626] text-white py-3 px-8 w-fit rounded-sm font-semibold hover:bg-black transition-colors">
-              Learn more about us
+              {t('about.learnMore') || 'Learn more about us'}
             </button>
           </div>
 
@@ -88,7 +95,7 @@ export default function AboutUs() {
                   {feature.icon}
                 </div>
                 <p className="text-[11px] font-bold uppercase leading-tight text-gray-800">
-                  {feature.label}
+                  {t(feature.labelKey)}
                 </p>
               </div>
             ))}

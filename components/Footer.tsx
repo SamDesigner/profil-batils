@@ -1,8 +1,13 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Phone, FileText, Mail, MapPin } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function UnifiedFooter() {
+    const { t } = useLanguage();
+
     return (
         <footer className="relative w-full overflow-hidden">
             {/* 1. SHARED BACKGROUND IMAGE */}
@@ -33,19 +38,19 @@ export default function UnifiedFooter() {
                     {/* Action Text & Buttons */}
                     <div className="max-w-xl text-center md:text-right">
                         <h2 className="text-2xl md:text-4xl font-black text-black uppercase mb-4 leading-tight">
-                            Ready to build your next project <br className="hidden md:block" /> with confidence?
+                            {t('footer.cta')}
                         </h2>
                         <p className="text-sm md:text-lg text-black/80 font-medium mb-8">
-                            We deliver reliable, high-performance drywall profile solutions for modern construction across Central Africa.
+                            {t('footer.ctaDesc')}
                         </p>
 
                         <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-end gap-4">
                             <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
                                 <FileText size={20} />
-                                Download our Catalogue
+                                {t('footer.downloadCatalogue')}
                             </button>
                             <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
-                                Get in Touch
+                                {t('footer.getInTouch')}
                                 <div className="bg-white rounded-full p-1 text-black">
                                     <Phone size={14} fill="currentColor" />
                                 </div>
@@ -64,19 +69,19 @@ export default function UnifiedFooter() {
                         {/* About Us */}
                         <div className="flex flex-col items-center md:items-start text-center md:text-left">
                             <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6 border-b-2 border-[#FFCC29] pb-2 inline-block text-white">
-                                About Us
+                                {t('footer.aboutUs')}
                             </h3>
                             <ul className="space-y-4 text-gray-300 text-sm font-medium">
-                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">Company profile</a></li>
-                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">Certifications</a></li>
-                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">Media</a></li>
+                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.companyProfile')}</a></li>
+                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.certifications')}</a></li>
+                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.media')}</a></li>
                             </ul>
                         </div>
 
                         {/* Products */}
                         <div className="flex flex-col items-center md:items-start text-center md:text-left">
                             <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6 border-b-2 border-[#FFCC29] pb-2 inline-block text-white">
-                                Products
+                                {t('footer.products')}
                             </h3>
                             <ul className="space-y-4 text-gray-300 text-sm font-medium">
                                 <li className="hover:text-white cursor-default transition-colors">UW (48 mm)</li>
@@ -89,14 +94,14 @@ export default function UnifiedFooter() {
                         {/* Contact Info */}
                         <div className="flex flex-col items-center md:items-start text-center md:text-left">
                             <h3 className="text-xs font-black uppercase tracking-[0.2em] mb-6 border-b-2 border-[#FFCC29] pb-2 inline-block text-white">
-                                Contact
+                                {t('footer.contact')}
                             </h3>
                             <div className="space-y-5">
                                 <div className="flex items-center justify-center md:justify-start gap-4 text-gray-300 text-sm group">
                                     <div className="bg-white/5 p-3 rounded-full group-hover:bg-[#FFCC29] group-hover:text-black transition-all">
                                         <Phone size={18} />
                                     </div>
-                                    <span className="font-semibold">+237 6 90 12 11 35</span>
+                                    <span className="font-semibold">{t('footer.phone')}</span>
                                 </div>
                                 <div className="flex items-center justify-center md:justify-start gap-4 text-gray-300 text-sm group">
                                     <div className="bg-white/5 p-3 rounded-full group-hover:bg-[#FFCC29] group-hover:text-black transition-all">

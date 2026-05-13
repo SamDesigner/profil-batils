@@ -1,31 +1,36 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
-
-const PROJECTS = [
-  {
-    title: "Doula Office Complex",
-    image: "/images/doula.png",
-    desc: "We were entrusted with the interior partition and ceiling systems for a commercial office complex...",
-  },
-  {
-    title: "Libreville Residential Development (Gabon)",
-    image: "/images/libreville.png",
-    desc: "For a high-end residential development in Libreville, we provided complete drywall profile...",
-  },
-  {
-    title: "Bangui Education Facility (Central African Republic)",
-    image: "/images/bangui.png",
-    desc: "In Bangui, we delivered cost-effective drywall profile solutions for an educational facility...",
-  },
-  {
-    title: "Malabo Hotel (Equatorial Guinea)",
-    image: "/images/malabo.png",
-    desc: "For a large hospitality project in Malabo, we supplied and supported the installation of...",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function FeaturedProjects() {
+  const { t } = useLanguage();
+
+  const PROJECTS = [
+    {
+      titleKey: "projects.project1",
+      image: "/images/doula.png",
+      descKey: "projects.desc1",
+    },
+    {
+      titleKey: "projects.project2",
+      image: "/images/libreville.png",
+      descKey: "projects.desc2",
+    },
+    {
+      titleKey: "projects.project3",
+      image: "/images/bangui.png",
+      descKey: "projects.desc3",
+    },
+    {
+      titleKey: "projects.project4",
+      image: "/images/malabo.png",
+      descKey: "projects.desc4",
+    },
+  ];
+
   return (
     <section className="bg-gray-600 py-20 px-4 md:px-0 relative overflow-hidden">
         {/* Decorative Background Pattern (Optional overlay) */}
@@ -35,7 +40,7 @@ export default function FeaturedProjects() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-center text-xl font-bold uppercase tracking-widest mb-12 text-white drop-shadow-md">
-          Featured Projects
+          {t('projects.title')}
         </h2>
 
         {/* Main Light Gray Container */}
@@ -45,14 +50,14 @@ export default function FeaturedProjects() {
               <div key={idx} className="flex flex-col items-center text-center">
                 {/* Project Title */}
                 <h3 className="font-bold text-[13px] md:text-sm text-gray-900 mb-4 h-10 flex items-center justify-center">
-                  {project.title}
+                  {t(project.titleKey)}
                 </h3>
 
                 {/* Project Image */}
                 <div className="relative aspect-square w-full mb-6 overflow-hidden shadow-md">
                   <Image
                     src={project.image}
-                    alt={project.title}
+                    alt={t(project.titleKey)}
                     fill
                     className="object-cover hover:scale-105 transition-transform duration-500"
                   />
@@ -60,12 +65,12 @@ export default function FeaturedProjects() {
 
                 {/* Description */}
                 <p className="text-[14px] text-gray-600 leading-relaxed mb-6 px-2 line-clamp-3">
-                  {project.desc}
+                  {t(project.descKey)}
                 </p>
 
                 {/* "See more" Button */}
                 <button className="flex items-center gap-2 bg-[#FFCC29] hover:bg-[#e6b825] text-black text-[11px] font-bold py-2 px-4 rounded-md shadow-sm transition-colors">
-                  See more <ChevronDown size={14} />
+                  {t('projects.seeMore')} <ChevronDown size={14} />
                 </button>
               </div>
             ))}
@@ -75,7 +80,7 @@ export default function FeaturedProjects() {
         {/* Global Action Button */}
         <div className="flex justify-center mt-12">
           <button className="bg-[#FFCC29] hover:bg-[#e6b825] text-black font-extrabold py-4 px-12 rounded-xl shadow-lg border-2 border-black/5 transition-all text-sm  tracking-wide">
-            Explore our Projects
+            {t('projects.explore')}
           </button>
         </div>
       </div>

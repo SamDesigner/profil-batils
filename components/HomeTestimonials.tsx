@@ -3,45 +3,46 @@ import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";
-
-const TESTIMONIALS = [
-  {
-    rating: 5,
-    quote: "We have been using Bati Profils' drywall systems on multiple projects, and the quality has been consistently excellent. The profiles are strong, lightweight, and very easy to install.",
-    image: "/images/testimonyOne.png",
-    author: "Construction Company",
-    location: "Douala, Cameroon",
-  },
-  {
-    rating: 4,
-    quote: "The overall experience working with Bati Profils has been very positive. From product quality to delivery timelines, everything has been handled professionally.",
-    image: "/images/testimonyTwo.png",
-    author: "Project Manager",
-    location: "Libreville, Gabon",
-  },
-  {
-    rating: 5,
-    quote: "What stands out about Bati Profils is their commitment to reliability and service. Their team is responsive and understands the needs of large-scale construction projects.",
-    image: "/images/testimonyThree.png",
-    author: "Engineering Consultant",
-    location: "Brazzaville, Republic of Congo",
-  },
-  // Add more items to see the slider in action
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // -1 for left, 1 for right
+  const { t } = useLanguage();
+
+  const TESTIMONIALS = [
+    {
+      rating: 5,
+      quoteKey: "testimonials.quote1",
+      image: "/images/testimonyOne.png",
+      authorKey: "testimonials.author1",
+      locationKey: "testimonials.location1",
+    },
+    {
+      rating: 4,
+      quoteKey: "testimonials.quote2",
+      image: "/images/testimonyTwo.png",
+      authorKey: "testimonials.author2",
+      locationKey: "testimonials.location2",
+    },
+    {
+      rating: 5,
+      quoteKey: "testimonials.quote3",
+      image: "/images/testimonyThree.png",
+      authorKey: "testimonials.author3",
+      locationKey: "testimonials.location3",
+    },
+  ];
 
   const nextStep = useCallback(() => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % TESTIMONIALS.length);
-  }, []);
+  }, [TESTIMONIALS.length]);
 
   const prevStep = useCallback(() => {
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
-  }, []);
+  }, [TESTIMONIALS.length]);
 
   // Autoplay Logic
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function Testimonials() {
         {/* Header with your signature double-line divider */}
         <div className="flex flex-col items-center mb-16">
           <h2 className="text-xl md:text-2xl font-bold uppercase tracking-widest text-gray-900 mb-4">
-            What Customers Say
+            {t('testimonials.title')}
           </h2>
           <div className="flex flex-col gap-1 w-24">
             <div className="h-0.5 bg-yellow-400 w-full" />
@@ -102,7 +103,7 @@ export default function Testimonials() {
                         <div className="relative">
                           <Quote className="absolute -top-4 -left-4 text-gray-100 w-12 h-12 -z-10" />
                           <p className="text-gray-700 italic leading-relaxed text-sm">
-                            &quot;{item.quote}&quot;
+                            &quot;{t(item.quoteKey)}&quot;
                           </p>
                         </div>
                       </div>
@@ -115,10 +116,10 @@ export default function Testimonials() {
                         {/* Attribution */}
                         <div className="border-l-2 border-yellow-400 pl-3">
                           <p className="font-bold text-xs uppercase text-gray-900 tracking-tight">
-                            {item.author}
+                            {t(item.authorKey)}
                           </p>
                           <p className="text-[11px] text-gray-500 font-medium">
-                            {item.location}
+                            {t(item.locationKey)}
                           </p>
                         </div>
                       </div>

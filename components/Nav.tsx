@@ -5,18 +5,21 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   const Links = [
-    { link: '/', label: 'Home' },
-    { link: '/about', label: 'About Us' },
-    { link: '/products', label: 'Products' },
-    { link: '/projects', label: 'Projects' },
-    { link: '/resources', label: 'Resources' },
-    { link: '/blogs', label: 'Blogs' }
+    { link: '/', labelKey: 'nav.home' },
+    { link: '/about', labelKey: 'nav.about' },
+    { link: '/products', labelKey: 'nav.products' },
+    { link: '/projects', labelKey: 'nav.projects' },
+    { link: '/resources', labelKey: 'nav.resources' },
+    { link: '/blogs', labelKey: 'nav.blogs' }
   ];
 
   return (
@@ -47,7 +50,7 @@ const Nav = () => {
                     isActive ? 'text-black' : 'text-gray-500 hover:text-black'
                   }`}
                 >
-                  {link.label}
+                  {t(link.labelKey)}
                 </Link>
                 {isActive && (
                   <motion.div 
@@ -60,9 +63,10 @@ const Nav = () => {
           })}
         </ul>
 
-        <div className="hidden lg:block">
+        <div className="hidden lg:flex items-center gap-4">
+          <LanguageToggle />
           <button className="bg-[#FFCC29] text-black px-6 py-2.5 rounded-lg border-2 border-black font-black uppercase text-xs tracking-tighter hover:bg-black hover:text-white transition-all">
-            Get in Touch
+            {t('nav.getInTouch')}
           </button>
         </div>
 
@@ -93,14 +97,15 @@ const Nav = () => {
                         isActive ? 'text-[#FFCC29]' : 'text-black'
                       }`}
                     >
-                      {link.label}
+                      {t(link.labelKey)}
                     </Link>
                   </li>
                 );
               })}
-              <li className="pt-4">
-                <button className="w-full bg-black text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm">
-                  Get in Touch
+              <li className="pt-4 flex gap-4">
+                <LanguageToggle />
+                <button className="flex-1 bg-black text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm">
+                  {t('nav.getInTouch')}
                 </button>
               </li>
             </ul>

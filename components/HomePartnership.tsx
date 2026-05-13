@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 const PARTNERS = [
   { name: "Laboc", logo: "/images/laboc.svg" },
@@ -17,6 +18,8 @@ const PARTNERS = [
 ];
 
 export default function OurPartners() {
+  const { t } = useLanguage();
+
   return (
     <section className="bg-white py-20 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto">
@@ -24,7 +27,7 @@ export default function OurPartners() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.2em] text-gray-800">
-            Our Partners
+            {t('partners.title')}
           </h2>
         </div>
 

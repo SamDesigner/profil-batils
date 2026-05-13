@@ -1,26 +1,31 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Download } from "lucide-react";
-
-const REASONS = [
-  {
-    title: "Precision Manufacturing",
-    image: "/images/chooseOne.png",
-    description: "Consistent quality using modern production technology",
-  },
-  {
-    title: "Flexible Applications",
-    image: "/images/chooseTwo.png",
-    description: "Suitable for partitions, ceilings, and cladding systems.",
-  },
-  {
-    title: "Cost-Efficiency",
-    image: "/images/chooseThree.png",
-    description: "Optimised for performance, durability and affordability",
-  },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function WhyChooseProducts() {
+  const { t } = useLanguage();
+
+  const REASONS = [
+    {
+      titleKey: "choose.reason1",
+      image: "/images/chooseOne.png",
+      descriptionKey: "choose.desc1",
+    },
+    {
+      titleKey: "choose.reason2",
+      image: "/images/chooseTwo.png",
+      descriptionKey: "choose.desc2",
+    },
+    {
+      titleKey: "choose.reason3",
+      image: "/images/chooseThree.png",
+      descriptionKey: "choose.desc3",
+    },
+  ];
+
   return (
     <section className="relative py-20 px-4 bg-white overflow-hidden">
       {/* Faint Industrial Background Overlay */}
@@ -35,7 +40,7 @@ export default function WhyChooseProducts() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <h2 className="text-center text-xl font-bold uppercase tracking-tight mb-16 text-gray-900">
-          Why Choose Our Products?
+          {t('choose.title')}
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-8">
@@ -47,7 +52,7 @@ export default function WhyChooseProducts() {
                 {/* Title Section (The Cutout look) */}
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white px-4">
                    <h3 className="text-sm font-extrabold uppercase text-center leading-tight whitespace-nowrap">
-                    {reason.title.split(' ').map((word, i) => (
+                    {t(reason.titleKey).split(' ').map((word, i) => (
                       <React.Fragment key={i}>
                         {word} <br />
                       </React.Fragment>
@@ -59,7 +64,7 @@ export default function WhyChooseProducts() {
                 <div className="relative aspect-square w-full mb-6 overflow-hidden shadow-xl">
                   <Image
                     src={reason.image}
-                    alt={reason.title}
+                    alt={t(reason.titleKey)}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
@@ -67,7 +72,7 @@ export default function WhyChooseProducts() {
 
                 {/* Description */}
                 <p className="text-sm text-gray-600 leading-relaxed text-center font-medium px-2">
-                  {reason.description}
+                  {t(reason.descriptionKey)}
                 </p>
               </div>
             </div>
@@ -80,7 +85,7 @@ export default function WhyChooseProducts() {
              <div className="bg-white/20 p-1.5 rounded-md">
                 <Download size={18} />
              </div>
-             <span className="font-bold text-sm tracking-wide">Download our Catalogue</span>
+             <span className="font-bold text-sm tracking-wide">{t('choose.downloadCatalogue')}</span>
           </button>
         </div>
       </div>

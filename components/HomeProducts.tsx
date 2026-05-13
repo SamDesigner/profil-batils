@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 
 // 1. Updated the interface to match your actual data keys
 interface Product {
@@ -18,6 +21,7 @@ const products: Product[] = [
 ];
 
 export default function HotProducts() {
+  const { t } = useLanguage();
   const firstRow = products.slice(0, 2);
   const secondRow = products.slice(2, 4);
 
@@ -39,7 +43,7 @@ export default function HotProducts() {
           </div>
           
           <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight whitespace-nowrap uppercase">
-            Hot Products
+            {t('products.title')}
           </h2>
           
           <div className="flex flex-col gap-1 flex-1 max-w-[250px]">
