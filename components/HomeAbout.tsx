@@ -10,7 +10,7 @@ const ABOUT_DATA = {
   gallery: { title: "Factory Gallery", description: "Explore our state-of-the-art production facility and advanced machinery." },
   certifications: { title: "Our Certifications", description: "Our commitment to quality is backed by international industry standards." }
 };
-
+type TabKey = keyof typeof ABOUT_DATA;
 const FEATURES = [
   { icon: "🌍", label: "Fast delivery across Africa", color: "bg-[#FFF9E5]" },
   { icon: "🤝", label: "5000+ Satisfied Customers", color: "bg-[#FFF9E5]" },
@@ -19,7 +19,7 @@ const FEATURES = [
 ];
 
 export default function AboutUs() {
-  const [activeTab, setActiveTab] = useState("profile");
+  const [activeTab, setActiveTab] = useState<TabKey>("profile");
 
   return (
     <section className="bg-white py-20 px-4">
