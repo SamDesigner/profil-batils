@@ -33,7 +33,7 @@ export default function AboutUs() {
           <div className="w-full lg:w-1/3">
             <div className="relative aspect-square rounded-sm overflow-hidden shadow-sm">
               <Image
-                src="/images/worker-factory.jpg" // Replace with your actual path
+                src="/images/engineer.png" // Replace with your actual path
                 alt="Factory Worker"
                 fill
                 className="object-cover"

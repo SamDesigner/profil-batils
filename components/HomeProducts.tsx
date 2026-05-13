@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 
 const products = [
@@ -26,8 +25,8 @@ export default function HotProducts() {
 
         {/* MIDDLE TITLE DIVIDER */}
         <div className="flex items-center justify-center gap-6 py-4">
-          <div className="flex flex-col gap-1 flex-1 max-w-[250px]">
-            <div className="h-[1px] bg-yellow-400 w-full" />
+          <div className="flex flex-col gap-1 flex-1 max-w-62.5">
+            {/* <div className="h-px bg-yellow-400 w-full" /> */}
             <div className="h-[1px] bg-yellow-400 w-full" />
           </div>
           
@@ -35,8 +34,8 @@ export default function HotProducts() {
             Hot Products
           </h2>
           
-          <div className="flex flex-col gap-1 flex-1 max-w-[250px]">
-            <div className="h-[1px] bg-yellow-400 w-full" />
+          <div className="flex flex-col gap-1 flex-1 max-w-62.5">
+            {/* <div className="h-[1px] bg-yellow-400 w-full" /> */}
             <div className="h-[1px] bg-yellow-400 w-full" />
           </div>
         </div>
