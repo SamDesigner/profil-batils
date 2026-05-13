@@ -26,7 +26,7 @@ const Nav = () => {
         <div className="relative w-32 h-12 md:w-40 md:h-14">
           <Link href="/">
             <Image
-              src="/images/logo.svg"
+              src="/images/Logo.svg"
               alt="Bati Profils"
               fill
               priority
