@@ -26,7 +26,7 @@ export default function HotProducts() {
   const secondRow = products.slice(2, 4);
 
   return (
-    <section className="bg-white py-12 px-4 md:px-0 font-sans">
+    <section className="bg-white py-12 px-4 md:px-8 font-sans">
       <div className="max-w-7xl mx-auto space-y-12"> {/* Changed to max-w-7xl for consistency with your other sections */}
         
         {/* FIRST ROW OF CARDS */}

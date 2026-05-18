@@ -45,7 +45,7 @@ const LanguageToggle = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
-            className="absolute right-0 mt-3 w-32 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110]"
+            className="absolute right-0 mt-3 w-32 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-110"
           >
             {languages.map((lang) => (
               <button
