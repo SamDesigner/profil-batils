@@ -2,7 +2,10 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
-
+import Africa from '@/public/images/africa.svg'
+import Handshake from '@/public/images/handshake.svg'
+import Recent from '@/public/images/recent.svg'
+import Employee from '@/public/images/employee.svg'
 export default function AboutUs() {
   const [activeTab, setActiveTab] = useState<"profile" | "gallery" | "certifications">("profile");
   const { t } = useLanguage();
@@ -23,10 +26,10 @@ export default function AboutUs() {
   };
 
   const FEATURES = [
-    { icon: "🌍", labelKey: "about.feature1", color: "bg-[#FFF9E5]" },
-    { icon: "🤝", labelKey: "about.feature2", color: "bg-[#FFF9E5]" },
-    { icon: "⏰", labelKey: "about.feature3", color: "bg-[#FFCC29]" },
-    { icon: "👷", labelKey: "about.feature4", color: "bg-[#FFF9E5]" },
+    { icon: <Image src={Africa} alt="Africa" width={40} height={40} />, labelKey: "about.feature1", color: "bg-[#FFF9E5]" },
+    { icon: <Image src={Handshake} alt="Handshake" width={40} height={40} />, labelKey: "about.feature2", color: "bg-[#FFF9E5]" },
+    { icon: <Image src={Recent} alt="Recent" width={40} height={40} />, labelKey: "about.feature3", color: "bg-[#FFCC29]" },
+    { icon: <Image src={Employee} alt="Employee" width={40} height={40} />, labelKey: "about.feature4", color: "bg-[#FFF9E5]" },
   ];
 
   return (
@@ -89,7 +92,7 @@ export default function AboutUs() {
             {FEATURES.map((feature, idx) => (
               <div 
                 key={idx} 
-                className={`${feature.color} p-6 flex flex-col items-center justify-center text-center group transition-transform hover:scale-[1.02]`}
+                className={`${feature.color} p-6 flex flex-col md:flex-row items-center justify-center md:justify-start gap-5  text-center group transition-transform hover:scale-[1.02]`}
               >
                 <div className="text-2xl mb-2 grayscale group-hover:grayscale-0 transition-all">
                   {feature.icon}

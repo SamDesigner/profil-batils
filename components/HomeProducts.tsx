@@ -38,16 +38,16 @@ export default function HotProducts() {
 
         {/* MIDDLE TITLE DIVIDER */}
         <div className="flex items-center justify-center gap-6 py-4">
-          <div className="flex flex-col gap-1 flex-1 max-w-[250px]">
-            <div className="h-[1px] bg-yellow-400 w-full" />
+          <div className="flex flex-col gap-1 flex-1 max-w-62.5">
+            <div className="h-px bg-yellow-400 w-full" />
           </div>
           
           <h2 className="text-xl md:text-2xl font-black text-gray-900 tracking-tight whitespace-nowrap uppercase">
             {t('products.title')}
           </h2>
           
-          <div className="flex flex-col gap-1 flex-1 max-w-[250px]">
-            <div className="h-[1px] bg-yellow-400 w-full" />
+          <div className="flex flex-col gap-1 flex-1 max-w-62.5">
+            <div className="h-px bg-yellow-400 w-full" />
           </div>
         </div>
 

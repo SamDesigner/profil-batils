@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { Phone, FileText, Award } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import catalogue from '@/public/images/catalogue.svg'
 
 export default function WhyChooseUs() {
   const { t } = useLanguage();
@@ -81,9 +82,11 @@ export default function WhyChooseUs() {
                 </button>
 
                 <button className="flex items-center gap-3 bg-[#262626] hover:bg-black text-white font-bold py-4 px-8 rounded-xl transition-all">
-                  <div className="bg-white text-black p-1 rounded-full">
+                  {/* <div className="bg-white text-black p-1 rounded-full">
                     <FileText size={14} fill="currentColor" />
-                  </div>
+                  </div> */}
+                  <Image src={catalogue} alt="Catalogue Icon" width={25} height={25} className="object-contain" />
+
                   {t('contractors.downloadCatalogue')}
                 </button>
               </div>

@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { useLanguage } from "@/context/LanguageContext";
+import Image from "next/image";
+import phone from '@/public/images/phone.svg'
 
 const SLIDES = [
   { titleKey: "showcase.title1", image: '/images/showcaseOne.png' },
@@ -51,6 +53,7 @@ export default function HeroCarousel() {
                     </button>
                     <button className="bg-[#1a1c1e] text-white px-8 py-3 rounded-md font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:bg-black transition-all">
                       {t('showcase.getInTouch')}
+                      <Image src={phone} alt="Phone Icon" width={20} height={20} className="object-contain" />
                     </button>
                   </div>
                 </div>

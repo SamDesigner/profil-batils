@@ -23,9 +23,9 @@ const Nav = () => {
   ];
 
   return (
-    <nav className="relative w-full bg-white z-[100] border-b border-gray-100 font-sans">
+    <nav className="relative w-full bg-white z-100 border-b border-gray-100 font-sans">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-12 py-4">
-        
+
         <div className="relative w-32 h-12 md:w-40 md:h-14">
           <Link href="/">
             <Image
@@ -44,16 +44,15 @@ const Nav = () => {
             const isActive = pathname === link.link;
             return (
               <li key={index} className="relative group">
-                <Link 
+                <Link
                   href={link.link}
-                  className={`text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${
-                    isActive ? 'text-black' : 'text-gray-500 hover:text-black'
-                  }`}
+                  className={`text-sm font-bold uppercase tracking-widest transition-colors duration-300 ${isActive ? 'text-black' : 'text-gray-500 hover:text-black'
+                    }`}
                 >
                   {t(link.labelKey)}
                 </Link>
                 {isActive && (
-                  <motion.div 
+                  <motion.div
                     layoutId="activeNav"
                     className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#FFCC29]"
                   />
@@ -65,12 +64,15 @@ const Nav = () => {
 
         <div className="hidden lg:flex items-center gap-4">
           <LanguageToggle />
-          <button className="bg-[#FFCC29] text-black px-6 py-2.5 rounded-lg border-2 border-black font-black uppercase text-xs tracking-tighter hover:bg-black hover:text-white transition-all">
-            {t('nav.getInTouch')}
-          </button>
+          <Link href="/contact">
+            <button className="bg-[#FFCC29] text-black px-6 py-2.5 rounded-lg border-2 border-black font-black uppercase text-xs tracking-tighter hover:bg-black hover:text-white transition-all">
+              {t('nav.getInTouch')}
+            </button>
+          </Link>
+
         </div>
 
-        <button 
+        <button
           className="lg:hidden text-black p-2"
           onClick={() => setIsOpen(!isOpen)}
         >
@@ -91,11 +93,10 @@ const Nav = () => {
                 const isActive = pathname === link.link;
                 return (
                   <li key={index} onClick={() => setIsOpen(false)}>
-                    <Link 
+                    <Link
                       href={link.link}
-                      className={`text-xl font-black uppercase tracking-tighter block ${
-                        isActive ? 'text-[#FFCC29]' : 'text-black'
-                      }`}
+                      className={`text-xl font-black uppercase tracking-tighter block ${isActive ? 'text-[#FFCC29]' : 'text-black'
+                        }`}
                     >
                       {t(link.labelKey)}
                     </Link>
