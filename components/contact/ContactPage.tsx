@@ -10,7 +10,7 @@ export default function ContactPage() {
     message: "",
   });
 
-  const WHATSAPP_NUMBER = "2348060465938"; // Format: Country code + number without zeros or plus signs
+  const WHATSAPP_NUMBER = "2349023046042"; // Format: Country code + number without zeros or plus signs
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;

@@ -5,6 +5,7 @@ import AboutMission from  '@/components/About/AboutMission'
 import AboutStats from '@/components/About/AboutStats'
 import AboutProcess from '@/components/About/AboutProcess'
 import AboutLeadership from '@/components/About/AboutLeadership'
+import FloatingWhatsApp from "@/components/FloatingWhatsapp"
 const Page = () => {
   return (
     <div>
@@ -15,6 +16,7 @@ const Page = () => {
         <AboutProcess />
         <AboutLeadership />
         <Footer />
+        <FloatingWhatsApp />
     </div>
   )
 }

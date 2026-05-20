@@ -56,11 +56,12 @@ export default function OurPartners() {
                   key={idx} 
                   className="relative w-32 md:w-48 h-20 md:h-28 shrink-0"
                 >
+                  {/* grayscale opacity-60 hover:grayscale-0 */}
                   <Image
                     src={partner.logo}
                     alt={partner.name}
                     fill
-                    className="object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110 transition-all duration-500 cursor-pointer"
+                    className="object-contain  hover:opacity-100 hover:scale-110 transition-all duration-500 cursor-pointer"
                   />
                 </div>
               ))}

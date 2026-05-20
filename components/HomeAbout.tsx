@@ -73,7 +73,7 @@ export default function AboutUs() {
             </div>
 
             {/* Dynamic Content */}
-            <div className="min-h-[250px]">
+            <div className="min-h-62.5">
               <h3 className="text-xl font-bold mb-4 text-gray-900">
                 {t(ABOUT_DATA[activeTab].titleKey)}
               </h3>

@@ -110,7 +110,8 @@ export default function Testimonials() {
 
                       <div className="mt-8">
                         {/* Project Image */}
-                        <div className="relative h-32 w-full rounded-lg overflow-hidden mb-4 grayscale group-hover/card:grayscale-0 transition-all">
+                        {/* grayscale group-hover/card:grayscale-0 */}
+                        <div className="relative h-32 w-full rounded-lg overflow-hidden mb-4  transition-all">
                           <Image src={item.image} alt="Project" fill className="object-cover" />
                         </div>
                         {/* Attribution */}

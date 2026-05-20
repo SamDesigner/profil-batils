@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { Calendar, User, ArrowLeft, ShieldCheck } from "lucide-react";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsapp";
 interface BlogType {
   id: string;
   title: string;
@@ -131,6 +131,7 @@ export default function BlogDetailPage() {
         </div>
       </article>
       <Footer />
+      <FloatingWhatsApp />
     </main>
   );
 }

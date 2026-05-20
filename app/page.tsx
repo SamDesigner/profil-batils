@@ -8,6 +8,7 @@ import HomeFeatured from '@/components/HomeFeatured';
 import HomeTestimonials from '@/components/HomeTestimonials';
 import HomePartnership from '@/components/HomePartnership';
 import Footer from '@/components/Footer';
+import FloatingWhatsapp from '@/components/FloatingWhatsapp'
 export default function Home() {
  
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <HomeTestimonials />
       <HomePartnership />
       <Footer /> 
+      <FloatingWhatsapp />
     </div>
   );
 }

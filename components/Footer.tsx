@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { Phone, FileText, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-
+import catalogueIcon from '@/public/images/footCatalogue.svg'
 export default function UnifiedFooter() {
     const { t } = useLanguage();
 
@@ -23,7 +23,7 @@ export default function UnifiedFooter() {
 
             {/* 2. CTA SECTION (Yellow Overlay) */}
             {/* Removed fixed height h-125 to prevent mobile cutoff, used min-h instead */}
-            <div className="relative z-10 bg-[#FFCC29]/70 backdrop-blur-[2px] py-16 md:py-24 px-6 md:px-12 border-t-8 border-white min-h-fit md:h-[500px] flex items-center">
+            <div className="relative z-10 bg-[#FFCC29]/70 backdrop-blur-[2px] py-16 md:py-24 px-6 md:px-12 border-t-8 border-white min-h-fit md:h-125 flex items-center">
                 <div className="max-w-7xl mx-auto w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
 
                     {/* Logo Branding */}
@@ -46,7 +46,9 @@ export default function UnifiedFooter() {
 
                         <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-end gap-4">
                             <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
-                                <FileText size={20} />
+                                {/* <FileText size={20} /> */}
+                                <Image src={catalogueIcon} alt='Catalogue Icon' width={25} height={25} />
+
                                 {t('footer.downloadCatalogue')}
                             </button>
                             <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
