@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
-import { MessageSquare } from "lucide-react";
+// import React from "react";
+// import { MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import WhatsApp from '@/public/images/whatsapp.png';
 import Image from "next/image";
