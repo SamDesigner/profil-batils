@@ -2,9 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import { ChevronDown, Link } from "lucide-react";
+import { ChevronDown , Link as Linker } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-
+import Link from 'next/link'
 export default function FeaturedProjects() {
   const { t } = useLanguage();
 
@@ -69,13 +69,13 @@ export default function FeaturedProjects() {
                 </p>
 
                 {/* "See more" Button */}
-            
-                  <button className="flex items-center gap-2 bg-[#FFCC29] hover:bg-[#e6b825] text-black text-[11px] font-bold py-2 px-4 rounded-md shadow-sm transition-colors"
 
-                  >
-                    {t('projects.seeMore')} <ChevronDown size={14} />
-                  </button>
-                
+                <button className="flex items-center gap-2 bg-[#FFCC29] hover:bg-[#e6b825] text-black text-[11px] font-bold py-2 px-4 rounded-md shadow-sm transition-colors"
+
+                >
+                  {t('projects.seeMore')} <ChevronDown size={14} />
+                </button>
+
               </div>
             ))}
           </div>
@@ -83,9 +83,11 @@ export default function FeaturedProjects() {
 
         {/* Global Action Button */}
         <div className="flex justify-center mt-12">
-          <button className="bg-[#FFCC29] hover:bg-[#e6b825] text-black font-extrabold py-4 px-12 rounded-xl shadow-lg border-2 border-black/5 transition-all text-sm  tracking-wide">
-            {t('projects.explore')}
-          </button>
+          <Link href="/projects">
+            <button className="bg-[#FFCC29] hover:bg-[#e6b825] text-black font-extrabold py-4 px-12 rounded-xl shadow-lg border-2 border-black/5 transition-all text-sm  tracking-wide">
+              {t('projects.explore')}
+            </button>
+          </Link>
         </div>
       </div>
     </section>

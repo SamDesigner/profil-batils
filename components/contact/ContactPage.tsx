@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, Send, MessageSquare } from "lucide-react";
+import { Phone, Mail, MapPin, Send, MessageSquare, Loader2, Clock } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -10,28 +10,61 @@ export default function ContactPage() {
     message: "",
   });
 
-  const WHATSAPP_NUMBER = "2349023046042"; // Format: Country code + number without zeros or plus signs
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
+
+  const WHATSAPP_NUMBER = "2349023046042"; 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (formError) setFormError("");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError("");
 
-    // 1. Construct a clean, structured message format for the inbox
+    // Client-Side Fields Validation 
+    if (!formData.fullName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setFormError("All required specification details must be completed before transmission.");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setFormError("Please enter a valid corporate email address.");
+      return;
+    }
+
+    if (formData.message.trim().length < 10) {
+      setFormError("Please provide a more detailed project quantity description (min. 10 characters).");
+      return;
+    }
+
+    setIsSubmitting(true);
+
     const textMessage = `*NEW INQUIRY FROM BATI PROFILS WEBSITE*\n\n` +
-      `*Name:* ${formData.fullName}\n` +
-      `*Email:* ${formData.email}\n` +
+      `*Name:* ${formData.fullName.trim()}\n` +
+      `*Email:* ${formData.email.trim()}\n` +
       `*System Type:* ${formData.projectType}\n\n` +
-      `*Message:* \n${formData.message}`;
+      `*Message:* \n${formData.message.trim()}`;
 
-    // 2. Safely encode URL components to ensure special characters don't break the query string
     const encodedMessage = encodeURIComponent(textMessage);
 
-    // 3. Trigger deep-linking redirect to the WhatsApp web/app API router
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, "_blank");
+    setTimeout(() => {
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, "_blank");
+
+      // Reset states fields back to empty defaults on success
+      setFormData({
+        fullName: "",
+        email: "",
+        projectType: "Partition",
+        message: "",
+      });
+
+      setIsSubmitting(false);
+    }, 1000);
   };
 
   return (
@@ -67,16 +100,32 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-6">
+              {/* Phone Desk */}
               <div className="flex items-center gap-4 text-gray-700 text-sm group">
                 <div className="bg-gray-100 p-4 rounded-xl border border-gray-200 text-black">
                   <Phone size={20} />
                 </div>
                 <div>
                   <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Calling Desk</span>
-                  <span className="font-bold text-base">+237 6 90 12 11 35</span>
+                  <a href="tel:+237690121135" className="font-bold text-base hover:underline">
+                    +237 6 90 12 11 35
+                  </a>
                 </div>
               </div>
 
+              {/* Contact Hours Window */}
+              <div className="flex items-start gap-4 text-gray-700 text-sm group">
+                <div className="bg-gray-100 p-4 rounded-xl border border-gray-200 text-black shrink-0">
+                  <Clock size={20} />
+                </div>
+                <div>
+                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Availability Window</span>
+                  <span className="font-bold text-sm block text-gray-900 mt-0.5">Mon - Fri: 8:00 AM – 4:30 PM</span>
+                  <span className="font-bold text-sm block text-gray-500">Saturday: 9:00 AM – 1:00 PM</span>
+                </div>
+              </div>
+
+              {/* Email Address */}
               <div className="flex items-center gap-4 text-gray-700 text-sm group">
                 <div className="bg-gray-100 p-4 rounded-xl border border-gray-200 text-black">
                   <Mail size={20} />
@@ -87,6 +136,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
+              {/* Physical Address */}
               <div className="flex items-start gap-4 text-gray-700 text-sm group">
                 <div className="bg-gray-100 p-4 rounded-xl border border-gray-200 text-black shrink-0">
                   <MapPin size={20} />
@@ -111,13 +161,19 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: REVENUE INPUT FORM ROUTING */}
+          {/* RIGHT COLUMN: INPUT FORM */}
           <div className="w-full lg:w-7/12 bg-white border-2 border-black p-8 md:p-10 shadow-sm">
             <h3 className="text-xl font-black uppercase tracking-tight text-gray-900 mb-6 border-b border-gray-100 pb-4">
               Request Quotation Frame
             </h3>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+              {formError && (
+                <div className="p-4 bg-red-50 border-l-4 border-red-600 text-xs font-bold uppercase tracking-wide text-red-700">
+                  {formError}
+                </div>
+              )}
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-2">
@@ -126,11 +182,11 @@ export default function ContactPage() {
                   <input
                     type="text"
                     name="fullName"
-                    required
+                    disabled={isSubmitting}
                     value={formData.fullName}
                     onChange={handleChange}
                     placeholder="e.g. John Doe / Sarl Construction"
-                    className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-medium focus:outline-none focus:border-black focus:bg-white transition-all rounded-none"
+                    className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-medium focus:outline-none focus:border-black focus:bg-white transition-all rounded-none disabled:opacity-50"
                   />
                 </div>
 
@@ -140,12 +196,12 @@ export default function ContactPage() {
                   </label>
                   <input
                     type="email"
-                    required
                     name="email"
+                    disabled={isSubmitting}
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="name@company.com"
-                    className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-medium focus:outline-none focus:border-black focus:bg-white transition-all rounded-none"
+                    className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-medium focus:outline-none focus:border-black focus:bg-white transition-all rounded-none disabled:opacity-50"
                   />
                 </div>
               </div>
@@ -156,9 +212,10 @@ export default function ContactPage() {
                 </label>
                 <select
                   name="projectType"
+                  disabled={isSubmitting}
                   value={formData.projectType}
                   onChange={handleChange}
-                  className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-bold uppercase tracking-wider focus:outline-none focus:border-black focus:bg-white transition-all rounded-none"
+                  className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-bold uppercase tracking-wider focus:outline-none focus:border-black focus:bg-white transition-all rounded-none disabled:opacity-50"
                 >
                   <option value="Partition">Partition Systems (UW / CW Track)</option>
                   <option value="Ceiling">Ceiling Frameworks (F-Channel / L-Angle)</option>
@@ -173,22 +230,32 @@ export default function ContactPage() {
                 </label>
                 <textarea
                   name="message"
-                  required
+                  disabled={isSubmitting}
                   rows={5}
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Detail profile dimensions, gauge limits (0.50mm - 0.70mm), total volumes required, or destination distribution drop points..."
-                  className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-medium focus:outline-none focus:border-black focus:bg-white transition-all rounded-none resize-none"
+                  className="w-full bg-gray-50 border-2 border-gray-200 px-4 py-3 text-sm font-medium focus:outline-none focus:border-black focus:bg-white transition-all rounded-none resize-none disabled:opacity-50"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-3 bg-black text-[#FFCC29] py-4 rounded-none font-black uppercase text-xs tracking-widest border border-black hover:bg-[#FFCC29] hover:text-black transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-3 bg-black text-[#FFCC29] py-4 rounded-none font-black uppercase text-xs tracking-widest border border-black hover:bg-[#FFCC29] hover:text-black transition-colors disabled:opacity-75 disabled:cursor-not-allowed"
                 >
-                  <span>Submit </span>
-                  <Send size={14} />
+                  {isSubmitting ? (
+                    <>
+                      <span>Routing Submittals</span>
+                      <Loader2 size={14} className="animate-spin text-[#FFCC29]" />
+                    </>
+                  ) : (
+                    <>
+                      <span>Submit Specifications</span>
+                      <Send size={14} />
+                    </>
+                  )}
                 </button>
               </div>
             </form>

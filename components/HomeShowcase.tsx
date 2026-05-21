@@ -16,7 +16,7 @@ export default function HeroCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { t } = useLanguage();
-  const phoneNumber = "+237640191919";
+  // const phoneNumber = "+237640191919";
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -34,11 +34,11 @@ export default function HeroCarousel() {
         <div className="flex h-full">
           {SLIDES.map((slide, index) => (
             <div key={index} className="relative flex-[0_0_100%] min-w-0 h-full">
-              <div 
+              <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
                 style={{ backgroundImage: `url(${slide.image})`, filter: 'brightness(0.6)' }}
               />
-              
+
               <div className="max-w-7xl mx-auto h-full px-6 sm:px-12 md:px-12 flex items-center">
                 <div className="relative z-10 flex flex-col justify-center">
                   <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6">
@@ -47,19 +47,19 @@ export default function HeroCarousel() {
                   <p className="text-base sm:text-lg lg:text-xl text-gray-200 mb-8 max-w-xl leading-relaxed">
                     {t('showcase.description')}
                   </p>
-                  
+
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Link href='/projects'>
-                    <button className="bg-yellow-400 text-black px-8 py-3 rounded-md font-semibold hover:bg-yellow-500 transition text-center shadow-lg">
-                      {t('showcase.exploreProjects')}
-                    </button>
+                      <button className="bg-yellow-400 text-black px-8 py-3 rounded-md font-semibold hover:bg-yellow-500 transition text-center shadow-lg">
+                        {t('showcase.exploreProjects')}
+                      </button>
                     </Link>
-                    <a href={`tel:${phoneNumber}`}>
-                    <button className="bg-[#1a1c1e] text-white px-8 py-3 rounded-md font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:bg-black transition-all">
-                      {t('showcase.getInTouch')}
-                      <Image src={phone} alt="Phone Icon" width={20} height={20} className="object-contain" />
-                    </button>
-                    </a>
+                    <Link href='/contact'>
+                      <button className="bg-[#1a1c1e] text-white px-8 py-3 rounded-md font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:bg-black transition-all">
+                        {t('showcase.getInTouch')}
+                        <Image src={phone} alt="Phone Icon" width={20} height={20} className="object-contain" />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -73,9 +73,8 @@ export default function HeroCarousel() {
           <button
             key={index}
             onClick={() => emblaApi?.scrollTo(index)}
-            className={`h-1.5 transition-all duration-300 rounded-full ${
-              index === selectedIndex ? "w-12 sm:w-16 bg-yellow-400" : "w-6 sm:w-8 bg-white/40"
-            }`}
+            className={`h-1.5 transition-all duration-300 rounded-full ${index === selectedIndex ? "w-12 sm:w-16 bg-yellow-400" : "w-6 sm:w-8 bg-white/40"
+              }`}
           />
         ))}
       </div>

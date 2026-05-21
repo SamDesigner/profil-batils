@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { SlidersHorizontal, Eye, FileText, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext"; // Importing your context hook
 
 interface ProductType {
   id: string;
@@ -12,6 +13,11 @@ interface ProductType {
   thickness: string;
   flange: string;
   description: string;
+  // Nested links object to easily match your active context state
+  files: {
+    en: string;
+    fr: string;
+  };
 }
 
 const PRODUCTS_DATA: ProductType[] = [
@@ -22,7 +28,11 @@ const PRODUCTS_DATA: ProductType[] = [
     src: "/images/UwProfile.png",
     thickness: "0.50mm - 0.70mm",
     flange: "40mm / 42mm",
-    description: "High-performance floor and ceiling tracks used to secure vertical studs in drywall partition systems."
+    description: "High-performance floor and ceiling tracks used to secure vertical studs in drywall partition systems.",
+    files: {
+      en: "/documents/baten/EN-6.png",
+      fr: "/documents/batfr/FR-6.png"
+    }
   },
   {
     id: "cw-46",
@@ -31,7 +41,11 @@ const PRODUCTS_DATA: ProductType[] = [
     src: "/images/CwProfile.png",
     thickness: "0.55mm - 0.70mm",
     flange: "47mm / 50mm",
-    description: "Vertical framing components inserted into U-tracks, engineered for load bearing and acoustic partition integrity."
+    description: "Vertical framing components inserted into U-tracks, engineered for load bearing and acoustic partition integrity.",
+    files: {
+      en: "/documents/baten/EN-7.png",
+      fr: "/documents/batfr/FR-7.png"
+    }
   },
   {
     id: "l-angle",
@@ -40,7 +54,11 @@ const PRODUCTS_DATA: ProductType[] = [
     src: "/images/LAngle.png",
     thickness: "0.50mm",
     flange: "25mm x 25mm",
-    description: "Wall-angle perimeter components providing solid support corners for suspended ceiling frameworks."
+    description: "Wall-angle perimeter components providing solid support corners for suspended ceiling frameworks.",
+    files: {
+      en: "/documents/baten/EN-8.png",
+      fr: "/documents/batfr/FR-8.png"
+    }
   },
   {
     id: "f-profile",
@@ -49,11 +67,16 @@ const PRODUCTS_DATA: ProductType[] = [
     src: "/images/FProfile.png",
     thickness: "0.60mm",
     flange: "47mm x 17mm",
-    description: "Primary and secondary ceiling channels designed for seamless joints in flush plasterboard ceilings."
+    description: "Primary and secondary ceiling channels designed for seamless joints in flush plasterboard ceilings.",
+    files: {
+      en: "/documents/baten/EN-9.png",
+      fr: "/documents/batfr/FR-9.png"
+    }
   }
 ];
 
 export default function PageContent() {
+  const { t, language } = useLanguage(); // Pulling global language state ('en' or 'fr')
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(null);
 
@@ -110,66 +133,79 @@ export default function PageContent() {
           <div className="flex-1 w-full">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <AnimatePresence mode="popLayout">
-                {filteredProducts.map((product) => (
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.4 }}
-                    key={product.id}
-                    className="relative bg-white border-2 border-black group overflow-hidden flex flex-col justify-between"
-                  >
-                    {/* Component Spec Tag */}
-                    <div className="absolute top-4 left-4 z-20 bg-[#FFCC29] text-black px-3 py-1 text-[10px] font-black uppercase tracking-wider border border-black">
-                      {product.category}
-                    </div>
+                {filteredProducts.map((product) => {
+                  // Safe fallback token typing lookup logic
+                  const activeLocale = (language === "fr" ? "fr" : "en") as "en" | "fr";
+                  const targetedDownloadUrl = product.files[activeLocale];
 
-                    {/* Image Box */}
-                    <div className="relative aspect-16/10 w-full bg-[#FAFAFA] border-b-2 border-black overflow-hidden">
-                      <Image
-                        src={product.src}
-                        alt={product.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 40vw"
-                        className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
+                  return (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.4 }}
+                      key={product.id}
+                      className="relative bg-white border-2 border-black group overflow-hidden flex flex-col justify-between"
+                    >
+                      {/* Component Spec Tag */}
+                      <div className="absolute top-4 left-4 z-20 bg-[#FFCC29] text-black px-3 py-1 text-[10px] font-black uppercase tracking-wider border border-black">
+                        {product.category}
+                      </div>
 
-                    {/* Meta Data Panel */}
-                    <div className="p-6 bg-white flex-1 flex flex-col justify-between">
-                      <div>
-                        <h3 className="text-lg md:text-xl font-black uppercase tracking-tight text-gray-900 mb-4">
-                          {product.name}
-                        </h3>
-                        <div className="grid grid-cols-2 gap-4 border-t border-b border-gray-100 py-3 mb-6 text-[11px] font-bold uppercase tracking-wide text-gray-500">
-                          <div>
-                            <span className="block text-gray-400 text-[9px]">Gauge Range</span>
-                            <span className="text-black font-extrabold">{product.thickness}</span>
-                          </div>
-                          <div>
-                            <span className="block text-gray-400 text-[9px]">Standard Flange</span>
-                            <span className="text-black font-extrabold">{product.flange}</span>
+                      {/* Image Box */}
+                      <div className="relative aspect-16/10 w-full bg-[#FAFAFA] border-b-2 border-black overflow-hidden">
+                        <Image
+                          src={product.src}
+                          alt={product.name}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 40vw"
+                          className="object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+
+                      {/* Meta Data Panel */}
+                      <div className="p-6 bg-white flex-1 flex flex-col justify-between">
+                        <div>
+                          <h3 className="text-lg md:text-xl font-black uppercase tracking-tight text-gray-900 mb-4">
+                            {product.name}
+                          </h3>
+                          <div className="grid grid-cols-2 gap-4 border-t border-b border-gray-100 py-3 mb-6 text-[11px] font-bold uppercase tracking-wide text-gray-500">
+                            <div>
+                              <span className="block text-gray-400 text-[9px]">Gauge Range</span>
+                              <span className="text-black font-extrabold">{product.thickness}</span>
+                            </div>
+                            <div>
+                              <span className="block text-gray-400 text-[9px]">Standard Flange</span>
+                              <span className="text-black font-extrabold">{product.flange}</span>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* Interactive Button Section */}
-                      <div className="flex gap-3">
-                        <button 
-                          onClick={() => setSelectedProduct(product)}
-                          className="flex-1 flex items-center justify-center gap-2 bg-[#333333] hover:bg-black text-white py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
-                        >
-                          <Eye size={16} />
-                          Quick Spec
-                        </button>
-                        <button className="flex items-center justify-center bg-gray-100 hover:bg-[#FFCC29] hover:text-black border border-gray-200 p-3 rounded-lg text-gray-700 transition-all">
-                          <FileText size={16} />
-                        </button>
+                        {/* Interactive Action Elements */}
+                        <div className="flex gap-3">
+                          <button 
+                            onClick={() => setSelectedProduct(product)}
+                            className="flex-1 flex items-center justify-center gap-2 bg-[#333333] hover:bg-black text-white py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
+                          >
+                            <Eye size={16} />
+                            Quick Spec
+                          </button>
+
+                          {/* DYNAMIC LANGUAGE ANCHOR PROTOCOL */}
+                          <a 
+                            href={targetedDownloadUrl}
+                            download={`${product.name.replace(/\s+/g, "_")}_${activeLocale.toUpperCase()}_Specification`}
+                            className="flex items-center justify-center bg-gray-100 hover:bg-[#FFCC29] hover:text-black border border-gray-200 p-3 rounded-lg text-gray-700 transition-all cursor-pointer"
+                            title={language === "fr" ? "Télécharger la fiche technique" : "Download technical asset"}
+                          >
+                            <FileText size={16} />
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  );
+                })}
               </AnimatePresence>
             </div>
           </div>

@@ -58,19 +58,22 @@ export default function UnifiedFooter() {
                         <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-end gap-4">
                             <a href={fileUrl}
                                 download={fileName} >
-                                <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
+                                <button className="flex items-center justify-center gap-3 bg-[#333333] cursor-pointer text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
                                     {/* <FileText size={20} /> */}
                                     <Image src={catalogueIcon} alt='Catalogue Icon' width={25} height={25} />
 
                                     {t('footer.downloadCatalogue')}
                                 </button>
                             </a>
-                            <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
-                                {t('footer.getInTouch')}
-                                <div className="bg-white rounded-full p-1 text-black">
-                                    <Phone size={14} fill="currentColor" />
-                                </div>
-                            </button>
+                            <a href="tel:+237690121135">
+
+                                <button className="flex items-center justify-center gap-3 cursor-pointer bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
+                                    {t('footer.getInTouch')}
+                                    <div className="bg-white rounded-full p-1 text-black">
+                                        <Phone size={14} fill="currentColor" />
+                                    </div>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -122,7 +125,7 @@ export default function UnifiedFooter() {
                             </h3>
                             <div className="space-y-5">
                                 <div className=" text-gray-300 text-sm group">
-                                    <a href={`tel:${phoneNumber}`}  className="flex items-center justify-center md:justify-start gap-4">
+                                    <a href={`tel:${phoneNumber}`} className="flex items-center justify-center md:justify-start gap-4">
                                         <div className="bg-white/5 w-fit p-3 rounded-full group-hover:bg-[#FFCC29] group-hover:text-black transition-all">
                                             <Phone size={18} />
                                         </div>
