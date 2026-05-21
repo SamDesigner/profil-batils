@@ -2,7 +2,8 @@
 import React from "react";
 import { MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
-
+import WhatsApp from '@/public/images/whatsapp.png';
+import Image from "next/image";
 export default function FloatingWhatsApp() {
   const WHATSAPP_NUMBER = "237690121135"; // Format: Country code + number without zeros or plus signs
   
@@ -23,15 +24,16 @@ export default function FloatingWhatsApp() {
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.1, y: -4 }}
         whileTap={{ scale: 0.9 }}
-        className="pointer-events-auto relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] border-2 border-white transition-shadow focus:outline-none group"
+        className="pointer-events-auto relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] cursor-pointer text-white shadow-[0_4px_14px_rgba(37,211,102,0.4)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.6)] border-2 border-white transition-shadow focus:outline-none group"
         aria-label="Contact us on WhatsApp"
       >
         {/* Radar Ping Animation for visual pull */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-25 group-hover:hidden" />
 
         {/* Custom Lucide Icon or SVG */}
-        <MessageSquare size={24} className="fill-current stroke-[2.5]" />
+        {/* <MessageSquare size={24} className="fill-current stroke-[2.5]" /> */}
 
+        <Image src={WhatsApp} alt="WhatsApp Icon" width={24} height={24} className="w-6 h-6" />
         {/* Clean tooltip hover flag */}
         <span className="absolute right-16 bg-black text-[#FFCC29] text-[10px] font-black uppercase tracking-widest px-3 py-1.5 border border-black shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">
           Chat With Us

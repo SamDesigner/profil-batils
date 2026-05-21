@@ -1,12 +1,23 @@
 "use client";
-
-import React from "react";
 import Image from "next/image";
-import { Phone, FileText, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import Link from "next/link";
 import catalogueIcon from '@/public/images/footCatalogue.svg'
 export default function UnifiedFooter() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const phoneNumber = "+237640191919";
+
+    const isFrench = language === "fr";
+    const fileUrl = isFrench
+        ? "/documents/baten/FN_catalogue.pdf"
+        : "/documents/baten/EN_catalogue.pdf";
+
+    const fileName = isFrench
+        ? "Catalogue_Entreprise_Bati_Profils.pdf"
+        : "Bati_Profils_Corporate_Catalogue.pdf";
+
+
 
     return (
         <footer className="relative w-full overflow-hidden">
@@ -45,12 +56,15 @@ export default function UnifiedFooter() {
                         </p>
 
                         <div className="flex flex-col sm:flex-row flex-wrap justify-center md:justify-end gap-4">
-                            <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
-                                {/* <FileText size={20} /> */}
-                                <Image src={catalogueIcon} alt='Catalogue Icon' width={25} height={25} />
+                            <a href={fileUrl}
+                                download={fileName} >
+                                <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
+                                    {/* <FileText size={20} /> */}
+                                    <Image src={catalogueIcon} alt='Catalogue Icon' width={25} height={25} />
 
-                                {t('footer.downloadCatalogue')}
-                            </button>
+                                    {t('footer.downloadCatalogue')}
+                                </button>
+                            </a>
                             <button className="flex items-center justify-center gap-3 bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
                                 {t('footer.getInTouch')}
                                 <div className="bg-white rounded-full p-1 text-black">
@@ -74,9 +88,9 @@ export default function UnifiedFooter() {
                                 {t('footer.aboutUs')}
                             </h3>
                             <ul className="space-y-4 text-gray-300 text-sm font-medium">
-                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.companyProfile')}</a></li>
-                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.certifications')}</a></li>
-                                <li><a href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.media')}</a></li>
+                                <li><Link href="/about" className="hover:text-[#FFCC29] transition-colors">{t('footer.companyProfile')}</Link></li>
+                                <li><Link href="/resources" className="hover:text-[#FFCC29] transition-colors">{t('footer.certifications')}</Link></li>
+                                {/* <li><Link href="#" className="hover:text-[#FFCC29] transition-colors">{t('footer.media')}</Link></li> */}
                             </ul>
                         </div>
 
@@ -86,10 +100,18 @@ export default function UnifiedFooter() {
                                 {t('footer.products')}
                             </h3>
                             <ul className="space-y-4 text-gray-300 text-sm font-medium">
-                                <li className="hover:text-white cursor-default transition-colors">UW (48 mm)</li>
-                                <li className="hover:text-white cursor-default transition-colors">CW (46.5 mm)</li>
-                                <li className="hover:text-white cursor-default transition-colors">L (25 mm)</li>
-                                <li className="hover:text-white cursor-default transition-colors">F (47 mm)</li>
+                                <li className="hover:text-white cursor-default transition-colors">
+                                    <Link href='/products'>UW (48 mm)</Link>
+                                </li>
+                                <li className="hover:text-white cursor-default transition-colors">
+                                    <Link href='/products'>CW (46.5 mm)</Link>
+                                </li>
+                                <li className="hover:text-white cursor-default transition-colors">
+                                    <Link href='/products'>L (25 mm)</Link>
+                                </li>
+                                <li className="hover:text-white cursor-default transition-colors">
+                                    <Link href='/products'>F (47 mm)</Link>
+                                </li>
                             </ul>
                         </div>
 
@@ -99,11 +121,13 @@ export default function UnifiedFooter() {
                                 {t('footer.contact')}
                             </h3>
                             <div className="space-y-5">
-                                <div className="flex items-center justify-center md:justify-start gap-4 text-gray-300 text-sm group">
-                                    <div className="bg-white/5 p-3 rounded-full group-hover:bg-[#FFCC29] group-hover:text-black transition-all">
-                                        <Phone size={18} />
-                                    </div>
-                                    <span className="font-semibold">{t('footer.phone')}</span>
+                                <div className=" text-gray-300 text-sm group">
+                                    <a href={`tel:${phoneNumber}`}  className="flex items-center justify-center md:justify-start gap-4">
+                                        <div className="bg-white/5 w-fit p-3 rounded-full group-hover:bg-[#FFCC29] group-hover:text-black transition-all">
+                                            <Phone size={18} />
+                                        </div>
+                                        <span className="font-semibold">{t('footer.phone')}</span>
+                                    </a>
                                 </div>
                                 <div className="flex items-center justify-center md:justify-start gap-4 text-gray-300 text-sm group">
                                     <div className="bg-white/5 p-3 rounded-full group-hover:bg-[#FFCC29] group-hover:text-black transition-all">

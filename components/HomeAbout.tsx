@@ -6,6 +6,7 @@ import Africa from '@/public/images/africa.svg'
 import Handshake from '@/public/images/handshake.svg'
 import Recent from '@/public/images/recent.svg'
 import Employee from '@/public/images/employee.svg'
+import Link from 'next/link'
 export default function AboutUs() {
   const [activeTab, setActiveTab] = useState<"profile" | "gallery" | "certifications">("profile");
   const { t } = useLanguage();
@@ -81,10 +82,11 @@ export default function AboutUs() {
                 {t(ABOUT_DATA[activeTab].descriptionKey)}
               </p>
             </div>
-
+            <Link href='/about'>
             <button className="mt-8 bg-[#262626] text-white py-3 px-8 w-fit rounded-sm font-semibold hover:bg-black transition-colors">
               {t('about.learnMore') || 'Learn more about us'}
             </button>
+            </Link>
           </div>
 
           {/* Right Side: Feature Cards */}

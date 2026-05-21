@@ -4,6 +4,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
 import phone from '@/public/images/phone.svg'
+import Link from "next/link";
 
 const SLIDES = [
   { titleKey: "showcase.title1", image: '/images/showcaseOne.png' },
@@ -15,7 +16,7 @@ export default function HeroCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
   const { t } = useLanguage();
-
+  const phoneNumber = "+237640191919";
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -48,13 +49,17 @@ export default function HeroCarousel() {
                   </p>
                   
                   <div className="flex flex-col sm:flex-row gap-4">
+                    <Link href='/projects'>
                     <button className="bg-yellow-400 text-black px-8 py-3 rounded-md font-semibold hover:bg-yellow-500 transition text-center shadow-lg">
                       {t('showcase.exploreProjects')}
                     </button>
+                    </Link>
+                    <a href={`tel:${phoneNumber}`}>
                     <button className="bg-[#1a1c1e] text-white px-8 py-3 rounded-md font-semibold flex items-center justify-center gap-2 border border-gray-700 hover:bg-black transition-all">
                       {t('showcase.getInTouch')}
                       <Image src={phone} alt="Phone Icon" width={20} height={20} className="object-contain" />
                     </button>
+                    </a>
                   </div>
                 </div>
               </div>

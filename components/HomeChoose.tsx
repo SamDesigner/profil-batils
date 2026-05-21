@@ -6,8 +6,15 @@ import { Download } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function WhyChooseProducts() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const isFrench = language === "fr";
+  const fileUrl = isFrench
+    ? "/documents/baten/FN_catalogue.pdf"
+    : "/documents/baten/EN_catalogue.pdf";
 
+  const fileName = isFrench
+    ? "Catalogue_Entreprise_Bati_Profils.pdf"
+    : "Bati_Profils_Corporate_Catalogue.pdf";
   const REASONS = [
     {
       titleKey: "choose.reason1",
@@ -48,10 +55,10 @@ export default function WhyChooseProducts() {
             <div key={idx} className="relative group">
               {/* The "Tabbed" Border Box */}
               <div className="relative border-2 border-gray-800 rounded-xl pt-12 pb-8 px-6 bg-white/50 backdrop-blur-sm">
-                
+
                 {/* Title Section (The Cutout look) */}
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white px-4">
-                   <h3 className="text-sm font-extrabold uppercase text-center leading-tight whitespace-nowrap">
+                  <h3 className="text-sm font-extrabold uppercase text-center leading-tight whitespace-nowrap">
                     {t(reason.titleKey).split(' ').map((word, i) => (
                       <React.Fragment key={i}>
                         {word} <br />
@@ -81,12 +88,16 @@ export default function WhyChooseProducts() {
 
         {/* Download Button */}
         <div className="flex justify-center mt-16">
-          <button className="flex items-center gap-3 bg-[#1a1a1a] text-white py-4 px-10 rounded-xl shadow-2xl hover:bg-black transition-all">
-             <div className="bg-white/20 p-1.5 rounded-md">
+
+          <a href={fileUrl}
+            download={fileName} >
+            <button className="flex items-center gap-3 bg-[#1a1a1a] text-white py-4 px-10 rounded-xl shadow-2xl hover:bg-black transition-all">
+              <div className="bg-white/20 p-1.5 rounded-md">
                 <Download size={18} />
-             </div>
-             <span className="font-bold text-sm tracking-wide">{t('choose.downloadCatalogue')}</span>
-          </button>
+              </div>
+              <span className="font-bold text-sm tracking-wide">{t('choose.downloadCatalogue')}</span>
+            </button>
+          </a>
         </div>
       </div>
     </section>

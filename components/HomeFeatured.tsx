@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Link } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function FeaturedProjects() {
@@ -33,10 +33,10 @@ export default function FeaturedProjects() {
 
   return (
     <section className="bg-gray-600 py-20 px-4 md:px-0 relative overflow-hidden">
-        {/* Decorative Background Pattern (Optional overlay) */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none grayscale">
-            <Image src="/images/HomeBg.png" alt="pattern" fill className="object-cover" />
-        </div>
+      {/* Decorative Background Pattern (Optional overlay) */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none grayscale">
+        <Image src="/images/HomeBg.png" alt="pattern" fill className="object-cover" />
+      </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         <h2 className="text-center text-xl font-bold uppercase tracking-widest mb-12 text-white drop-shadow-md">
@@ -69,9 +69,13 @@ export default function FeaturedProjects() {
                 </p>
 
                 {/* "See more" Button */}
-                <button className="flex items-center gap-2 bg-[#FFCC29] hover:bg-[#e6b825] text-black text-[11px] font-bold py-2 px-4 rounded-md shadow-sm transition-colors">
-                  {t('projects.seeMore')} <ChevronDown size={14} />
-                </button>
+            
+                  <button className="flex items-center gap-2 bg-[#FFCC29] hover:bg-[#e6b825] text-black text-[11px] font-bold py-2 px-4 rounded-md shadow-sm transition-colors"
+
+                  >
+                    {t('projects.seeMore')} <ChevronDown size={14} />
+                  </button>
+                
               </div>
             ))}
           </div>

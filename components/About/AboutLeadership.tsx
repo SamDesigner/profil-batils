@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import Link from "next/link";
 export default function RegionalReach() {
   return (
     <section className="py-24 bg-white px-4">
@@ -27,9 +27,11 @@ export default function RegionalReach() {
             Our logistics network ensures that whether you are building a commercial hub in Libreville or an educational facility in Bangui, our profiles arrive on time, every time.
           </p>
           <div className="pt-4">
-            <button className="bg-black text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-[#FFCC29] hover:text-black transition-all">
-              Request Company Profile
-            </button>
+            <Link className="cursor-pointer" href="/contact">
+              <button className="bg-black text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-[#FFCC29] hover:text-black transition-all">
+                Request Company Profile
+              </button>
+            </Link>
           </div>
         </div>
       </div>
