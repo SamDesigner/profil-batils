@@ -6,9 +6,10 @@ import WhatsApp from '@/public/images/whatsapp.png';
 import Image from "next/image";
 export default function FloatingWhatsApp() {
   const WHATSAPP_NUMBER = "237690121135"; // Format: Country code + number without zeros or plus signs
-  
+
   // Clean welcome message context for the user
-  const initialMessage = "Hello Bati Profils, I would like to make an inquiry regarding your steel profiles.";
+  // const initialMessage = "Hello Bati Profils, I would like to make an inquiry regarding your steel profiles.";
+  const initialMessage = "Bonjour Bati Profils, je souhaite obtenir des informations concernant vos profilés en acier.";
   const encodedMessage = encodeURIComponent(initialMessage);
 
   const handleRedirect = () => {
