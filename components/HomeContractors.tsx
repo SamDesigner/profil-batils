@@ -81,7 +81,7 @@ export default function WhyChooseUs() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4">
-                <a href="tel:+237690121135">
+                <a href="tel:+237640191919">
                   <button className="flex items-center gap-3 bg-[#ffcc29] hover:bg-[#e6b825] text-black font-bold py-4 px-8 rounded-xl transition-all shadow-lg shadow-yellow-400/20">
                     <div className="bg-black text-white p-1 rounded-full">
                       <Phone size={14} fill="currentColor" />

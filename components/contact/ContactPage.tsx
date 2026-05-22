@@ -13,7 +13,7 @@ export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState("");
 
-  const WHATSAPP_NUMBER = "237690121135"; 
+  const WHATSAPP_NUMBER = "237640191919"; 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -107,7 +107,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Calling Desk</span>
-                  <a href="tel:+237690121135" className="font-bold text-base hover:underline">
+                  <a href="tel:+237640191919" className="font-bold text-base hover:underline">
                     +237 6 90 12 11 35
                   </a>
                 </div>

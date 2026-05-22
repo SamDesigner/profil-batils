@@ -65,7 +65,7 @@ export default function UnifiedFooter() {
                                     {t('footer.downloadCatalogue')}
                                 </button>
                             </a>
-                            <a href="tel:+237690121135">
+                            <a href="tel:+237640191919">
 
                                 <button className="flex items-center justify-center gap-3 cursor-pointer bg-[#333333] text-white px-6 py-4 rounded-xl hover:bg-black transition-all font-bold shadow-md text-sm md:text-base">
                                     {t('footer.getInTouch')}
