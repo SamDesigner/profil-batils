@@ -108,6 +108,111 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.products': 'Products',
     'footer.contact': 'Contact',
     'footer.phone': '+237 6 90 12 11 35',
+
+    // About Page - Hero
+    'about.breadcrumb.home': 'Home',
+    'about.breadcrumb.about': 'About Us',
+    'about.hero.title': 'Engineering the Skeleton of Modern Architecture.',
+    'about.hero.description': 'Bati Profils is a leader in precision-engineered drywall systems, delivering the structural integrity required for the CEMAC region\'s most ambitious construction projects.',
+    'about.hero.established': 'EST. 2015',
+
+    // About Page - Mission & Vision
+    'about.mission.title': 'Our Mission',
+    'about.mission.text': 'To provide high-performance drywall systems that simplify construction without compromising on structural integrity, ensuring every build in the CEMAC region stands on a foundation of excellence.',
+    'about.vision.title': 'Our Vision',
+    'about.vision.text': 'To be the standard-bearer for industrial manufacturing across Central Africa, driving innovation in steel profile engineering and sustainable urban development.',
+
+    // About Page - Manufacturing Process
+    'about.process.title': 'Our Manufacturing Process',
+    'about.process.step1': 'Material Selection',
+    'about.process.desc1': 'We source high-grade galvanized steel to ensure maximum corrosion resistance.',
+    'about.process.step2': 'Precision Forming',
+    'about.process.desc2': 'Using advanced roll-forming technology for exact dimensions and structural load capacity.',
+    'about.process.step3': 'Supply Chain Logics',
+    'about.process.desc3': 'Strategically distributed from our Douala hub to construction sites across Central Africa.',
+
+    // About Page - Leadership & Regional Reach
+    'about.leadership.title': 'Dominating the CEMAC Region',
+    'about.leadership.heading': 'From Douala to the Continent.',
+    'about.leadership.para1': 'Established in 2015, Bati Profils identified a gap in the Central African market for high-standard drywall components. Today, we bridge that gap by operating one of the most technologically advanced roll-forming facilities in Cameroon.',
+    'about.leadership.para2': 'Our logistics network ensures that whether you are building a commercial hub in Libreville or an educational facility in Bangui, our profiles arrive on time, every time.',
+    'about.leadership.button': 'Request Company Profile',
+
+    // Contact Page
+    'contact.directProcurement': 'Direct Procurement',
+    'contact.contactUs': 'Contact Us',
+    'contact.heroDescription': 'Submit your construction project specs below to route your bill of quantities or custom framing request directly to our commercial office desk via WhatsApp.',
+    'contact.headquartersOffice': 'Headquarters Office',
+    'contact.officeDescription': 'Our local manufacturing units and administrative hubs remain positioned to facilitate rapid submittal processing across central logistical corridors.',
+    'contact.callingDesk': 'Calling Desk',
+    'contact.availabilityWindow': 'Availability Window',
+    'contact.emailSubmittals': 'Email Submittals',
+    'contact.plantLocation': 'Plant Location',
+    'contact.hours': 'Mon - Fri: 8:00 AM – 4:30 PM',
+    'contact.saturdayHours': 'Saturday: 9:00 AM – 1:00 PM',
+    'contact.formFullName': 'Full Name',
+    'contact.formEmail': 'Email',
+    'contact.formProjectType': 'Project Type',
+    'contact.formMessage': 'Message',
+    'contact.formSubmit': 'Send Inquiry',
+    'contact.formValidationAll': 'All required specification details must be completed before transmission.',
+    'contact.formValidationEmail': 'Please enter a valid corporate email address.',
+    'contact.formValidationMessage': 'Please provide a more detailed project quantity description (min. 10 characters).',
+
+    // Floating WhatsApp
+    'whatsapp.chatWithUs': 'Chat With Us',
+
+    // Products Page
+    'products.page.title': 'Technical',
+    'products.page.titleHighlight': 'Catalog',
+    'products.page.description': 'Precision-engineered galvanized steel profiles compliant with global structural construction standards.',
+    'products.filter.label': 'Filter Profiles',
+    'products.category.all': 'All',
+    'products.category.partition': 'Partition',
+    'products.category.ceiling': 'Ceiling',
+    'products.category.cladding': 'Cladding',
+    'products.category.systems': 'Systems',
+    'products.action.quickSpec': 'Quick Spec',
+    'products.action.downloadAsset': 'Download technical asset',
+    'products.action.downloadAssetFr': 'Télécharger la fiche technique',
+
+    // Projects Page
+    'projects.page.subtitle': 'Proven Infrastructure',
+    'projects.page.title': 'Our',
+    'projects.page.titleHighlight': 'Projects',
+    'projects.page.description': 'A comprehensive track record of precision-engineered steel profile applications across critical structural builds in the CEMAC region.',
+    'projects.filter.label': 'Sector Filter:',
+    'projects.filter.all': 'All',
+    'projects.filter.commercial': 'Commercial',
+    'projects.filter.industrial': 'Industrial',
+    'projects.filter.infrastructure': 'Infrastructure',
+
+    // Blogs Page
+    'blogs.page.subtitle': 'Company Insights',
+    'blogs.page.title': 'Our',
+    'blogs.page.titleHighlight': 'Blogs',
+    'blogs.page.description': 'Stay informed with construction breakthroughs, steel manufacturing analysis, and official company announcements from Bati Profils.',
+    'blogs.filter.all': 'All',
+    'blogs.filter.allPosts': 'All Posts',
+    'blogs.filter.technical': 'Technical',
+    'blogs.filter.industryNews': 'Industry News',
+    'blogs.filter.caseStudy': 'Case Study',
+    'blogs.search.placeholder': 'Search articles & highlights...',
+
+    // Resources Page
+    'resources.page.subtitle': 'Technical Submittals',
+    'resources.page.title': 'Technical',
+    'resources.page.titleHighlight': 'Resources',
+    'resources.page.description': 'Access and download structural data sheets, architectural design assets, compliance records, and configuration manuals for submittal approvals.',
+    'resources.filter.all': 'All',
+    'resources.filter.allDocuments': 'All Documents',
+    'resources.filter.catalogues': 'Catalogues',
+    'resources.filter.technicalData': 'Technical Data',
+    'resources.filter.certificates': 'Certificates',
+    'resources.filter.guides': 'Guides',
+    'resources.search.placeholder': 'Search documentation files...',
+    'resources.action.downloadAsset': 'Download Asset',
+    'resources.empty.message': 'No technical documentation matching search parameters found.',
   },
   fr: {
     // Navigation
@@ -204,11 +309,116 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.products': 'Produits',
     'footer.contact': 'Contact',
     'footer.phone': '+237 6 90 12 11 35',
+
+    // About Page - Hero
+    'about.breadcrumb.home': 'Accueil',
+    'about.breadcrumb.about': 'À Propos',
+    'about.hero.title': 'Concevoir le Squelette de l\'Architecture Moderne.',
+    'about.hero.description': 'Bati Profils est un leader dans les systèmes de cloisons sèches d\'ingénierie de précision, offrant l\'intégrité structurelle requise pour les projets de construction les plus ambitieux de la région de la CEMAC.',
+    'about.hero.established': 'DEPUIS 2015',
+
+    // About Page - Mission & Vision
+    'about.mission.title': 'Notre Mission',
+    'about.mission.text': 'Fournir des systèmes de cloisons sèches haute performance qui simplifient la construction sans compromettre l\'intégrité structurelle, garantissant que chaque construction dans la région CEMAC repose sur une fondation d\'excellence.',
+    'about.vision.title': 'Notre Vision',
+    'about.vision.text': 'Être le porte-étendard de la fabrication industrielle en Afrique centrale, en stimulant l\'innovation dans l\'ingénierie des profils d\'acier et le développement urbain durable.',
+
+    // About Page - Manufacturing Process
+    'about.process.title': 'Notre Processus de Fabrication',
+    'about.process.step1': 'Sélection des Matériaux',
+    'about.process.desc1': 'Nous approvisionnons de l\'acier galvanisé de haute qualité pour assurer une résistance maximale à la corrosion.',
+    'about.process.step2': 'Profilage de Précision',
+    'about.process.desc2': 'Utilisation de la technologie de profilage avancée pour des dimensions exactes et une capacité de charge structurelle.',
+    'about.process.step3': 'Logistique de Chaîne d\'Approvisionnement',
+    'about.process.desc3': 'Distribuée stratégiquement depuis notre centre de Douala vers les sites de construction en Afrique centrale.',
+
+    // About Page - Leadership & Regional Reach
+    'about.leadership.title': 'Dominer la Région CEMAC',
+    'about.leadership.heading': 'De Douala au Continent.',
+    'about.leadership.para1': 'Fondée en 2015, Bati Profils a identifié une lacune sur le marché d\'Afrique centrale pour les composants de cloisons sèches de haute qualité. Aujourd\'hui, nous comblons cette lacune en exploitant l\'une des installations de profilage les plus technologiquement avancées du Cameroun.',
+    'about.leadership.para2': 'Notre réseau logistique assure que vous construisiez un centre commercial à Libreville ou une établissement d\'enseignement à Bangui, nos profilés arrivent à temps, toujours.',
+    'about.leadership.button': 'Demander le Profil de l\'Entreprise',
+
+    // Contact Page
+    'contact.directProcurement': 'Approvisionnement Direct',
+    'contact.contactUs': 'Nous Contacter',
+    'contact.heroDescription': 'Soumettez les spécifications de votre projet de construction ci-dessous pour acheminer votre devis ou demande de cadre personnalisé directement à notre bureau commercial via WhatsApp.',
+    'contact.headquartersOffice': 'Bureau Siège',
+    'contact.officeDescription': 'Nos unités de fabrication locales et nos centres administratifs restent positionnés pour faciliter le traitement rapide des demandes dans les corridors logistiques centraux.',
+    'contact.callingDesk': 'Bureau Téléphonique',
+    'contact.availabilityWindow': 'Fenêtre de Disponibilité',
+    'contact.emailSubmittals': 'Soumissions par Email',
+    'contact.plantLocation': 'Localisation de l\'Usine',
+    'contact.hours': 'Lun - Ven: 8h00 - 16h30',
+    'contact.saturdayHours': 'Samedi: 9h00 - 13h00',
+    'contact.formFullName': 'Nom Complet',
+    'contact.formEmail': 'Email',
+    'contact.formProjectType': 'Type de Projet',
+    'contact.formMessage': 'Message',
+    'contact.formSubmit': 'Envoyer la Demande',
+    'contact.formValidationAll': 'Tous les détails de spécification requis doivent être complétés avant la transmission.',
+    'contact.formValidationEmail': 'Veuillez entrer une adresse e-mail professionnelle valide.',
+    'contact.formValidationMessage': 'Veuillez fournir une description de quantité de projet plus détaillée (min. 10 caractères).',
+
+    // Floating WhatsApp
+    'whatsapp.chatWithUs': 'Discutez avec Nous',
+
+    // Products Page
+    'products.page.title': 'Technique',
+    'products.page.titleHighlight': 'Catalogue',
+    'products.page.description': 'Profilés en acier galvanisé d\'ingénierie de précision conformes aux normes mondiales de construction structurelle.',
+    'products.filter.label': 'Filtrer les Profils',
+    'products.category.all': 'Tous',
+    'products.category.partition': 'Cloisons',
+    'products.category.ceiling': 'Plafonds',
+    'products.category.cladding': 'Revêtement',
+    'products.category.systems': 'Systèmes',
+    'products.action.quickSpec': 'Spécification Rapide',
+    'products.action.downloadAsset': 'Télécharger la fiche technique',
+    'products.action.downloadAssetFr': 'Télécharger la fiche technique',
+
+    // Projects Page
+    'projects.page.subtitle': 'Infrastructure Éprouvée',
+    'projects.page.title': 'Nos',
+    'projects.page.titleHighlight': 'Projets',
+    'projects.page.description': 'Un bilan complet des applications de profils d\'acier d\'ingénierie de précision dans les constructions structurales critiques de la région CEMAC.',
+    'projects.filter.label': 'Filtre Secteur:',
+    'projects.filter.all': 'Tous',
+    'projects.filter.commercial': 'Commercial',
+    'projects.filter.industrial': 'Industriel',
+    'projects.filter.infrastructure': 'Infrastructure',
+
+    // Blogs Page
+    'blogs.page.subtitle': 'Aperçus de l\'Entreprise',
+    'blogs.page.title': 'Nos',
+    'blogs.page.titleHighlight': 'Blogs',
+    'blogs.page.description': 'Restez informé avec les percées en construction, l\'analyse de la fabrication de l\'acier et les annonces officielles de l\'entreprise de Bati Profils.',
+    'blogs.filter.all': 'Tous',
+    'blogs.filter.allPosts': 'Tous les Articles',
+    'blogs.filter.technical': 'Technique',
+    'blogs.filter.industryNews': 'Actualités de l\'Industrie',
+    'blogs.filter.caseStudy': 'Étude de Cas',
+    'blogs.search.placeholder': 'Rechercher des articles et points forts...',
+
+    // Resources Page
+    'resources.page.subtitle': 'Soumissions Techniques',
+    'resources.page.title': 'Ressources',
+    'resources.page.titleHighlight': 'Techniques',
+    'resources.page.description': 'Accédez et téléchargez les fiches techniques structurelles, les documentations de conception, les registres de conformité et les manuels de configuration.',
+    'resources.filter.all': 'Tous',
+    'resources.filter.allDocuments': 'Tous les Documents',
+    'resources.filter.catalogues': 'Catalogues',
+    'resources.filter.technicalData': 'Données Techniques',
+    'resources.filter.certificates': 'Certificats',
+    'resources.filter.guides': 'Guides',
+    'resources.search.placeholder': 'Rechercher des documents...',
+    'resources.action.downloadAsset': 'Télécharger l\'élément',
+    'resources.empty.message': 'Aucune documentation technique ne correspond aux paramètres de recherche.',
   },
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>('en');
+  const [language, setLanguageState] = useState<Language>('fr');
 
   // Hydrate from localStorage on mount
   useEffect(() => {

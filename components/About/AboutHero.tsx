@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function AboutHero() {
+  const { t } = useLanguage();
+  
   return (
-    <section className="relative h-[70vh] md:h-[80vh] w-full flex items-center overflow-hidden bg-black">
+    <section className="relative h-[70vh] md:h-[90vh] py-5 w-full flex items-center overflow-hidden bg-black">
       {/* 1. Background Image with Industrial Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -29,9 +31,9 @@ export default function AboutHero() {
           transition={{ duration: 0.5 }}
           className="flex items-center gap-2 text-[#FFCC29] text-xs md:text-sm font-bold uppercase tracking-widest mb-6"
         >
-          <span className="opacity-70">Home</span>
+          <span className="opacity-70">{t('about.breadcrumb.home')}</span>
           <ChevronRight size={14} />
-          <span>About Us</span>
+          <span>{t('about.breadcrumb.about')}</span>
         </motion.div>
 
         {/* 3. Main Narrative Hook */}
@@ -42,9 +44,7 @@ export default function AboutHero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[0.9] uppercase tracking-tighter mb-6"
           >
-            Engineering the <br /> 
-            <span className="text-[#FFCC29]">Skeleton</span> of Modern <br /> 
-            Architecture.
+            {t('about.hero.title')}
           </motion.h1>
 
           <motion.div 
@@ -60,9 +60,7 @@ export default function AboutHero() {
             transition={{ duration: 0.8, delay: 0.7 }}
             className="text-gray-300 text-lg md:text-xl max-w-2xl leading-relaxed font-medium"
           >
-            Bati Profils is a leader in precision-engineered drywall systems, 
-            delivering the structural integrity required for the CEMAC region's 
-            most ambitious construction projects.
+            {t('about.hero.description')}
           </motion.p>
         </div>
       </div>
@@ -70,7 +68,7 @@ export default function AboutHero() {
       {/* 4. Decorative Industrial Element */}
       <div className="absolute bottom-0 right-0 p-12 hidden lg:block opacity-20">
         <div className="text-[120px] font-black text-white leading-none select-none">
-          EST. 2015
+          {t('about.hero.established')}
         </div>
       </div>
     </section>

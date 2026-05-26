@@ -3,51 +3,89 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { MapPin, Building2, Layers, X, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext"; // Importing your language context hook
+
+interface LocalizedString {
+  en: string;
+  fr: string;
+}
 
 interface ProjectType {
   id: string;
-  title: string;
-  location: string;
+  title: LocalizedString;
+  location: string; // Stays global as cities/countries usually don't change drastically here
   sector: "Commercial" | "Residential" | "Industrial" | "Infrastructure";
-  scope: string;
+  scope: LocalizedString;
   image: string;
-  details: string;
+  details: LocalizedString;
 }
 
 const PROJECTS_DATA: ProjectType[] = [
   {
     id: "proj-1",
-    title: "Akwa Commercial Complex",
+    title: {
+      en: "Akwa Commercial Complex",
+      fr: "Complexe Commercial d'Akwa"
+    },
     location: "Douala, Cameroon",
     sector: "Commercial",
-    scope: "Premium partition walls and ceiling frameworks across 12 floors.",
+    scope: {
+      en: "Premium partition walls and ceiling frameworks across 12 floors.",
+      fr: "Cloisons de séparation premium et ossatures de plafond sur 12 étages."
+    },
     image: "/images/testimonyOne.png",
-    details: "Supplied complete CW and UW galvanized steel partition systems engineered to strict acoustic attenuation and high-load partition rigidity criteria."
+    details: {
+      en: "Supplied complete CW and UW galvanized steel partition systems engineered to strict acoustic attenuation and high-load partition rigidity criteria.",
+      fr: "Fourniture de systèmes complets de cloisons en acier galvanisé CW et UW, conçus selon des critères stricts d'atténuation acoustique et de rigidité sous forte charge."
+    }
   },
   {
     id: "proj-2",
-    title: "Libreville Shopping Hub",
+    title: {
+      en: "Libreville Shopping Hub",
+      fr: "Centre Commercial de Libreville"
+    },
     location: "Libreville, Gabon",
     sector: "Commercial",
-    scope: "Suspended flush plasterboard ceilings spanning 8,500 sqm.",
+    scope: {
+      en: "Suspended flush plasterboard ceilings spanning 8,500 sqm.",
+      fr: "Plafonds suspendus en plaques de plâtre lisses sur 8 500 m²."
+    },
     image: "/images/testimonyTwo.png",
-    details: "Utilized F-Profiles and primary channels configured for seamless large-scale installations under highly demanding internal climate fluctuations."
+    details: {
+      en: "Utilized F-Profiles and primary channels configured for seamless large-scale installations under highly demanding internal climate fluctuations.",
+      fr: "Utilisation de profilés en F et de rails primaires configurés pour des installations transparentes à grande échelle sous des fluctuations climatiques internes exigeantes."
+    }
   },
   {
     id: "proj-3",
-    title: "Brazzaville Administrative Towers",
+    title: {
+      en: "Brazzaville Administrative Towers",
+      fr: "Tours Administratives de Brazzaville"
+    },
     location: "Brazzaville, Republic of Congo",
     sector: "Infrastructure",
-    scope: "Heavy-gauge wall framing and corner reinforcements.",
+    scope: {
+      en: "Heavy-gauge wall framing and corner reinforcements.",
+      fr: "Ossature murale de forte épaisseur et renforts d'angles."
+    },
     image: "/images/testimonyThree.png",
-    details: "Delivered precise L-Angle and reinforced steel profiles matching specific regional structural load tolerances for ministerial facilities."
+    details: {
+      en: "Delivered precise L-Angle and reinforced steel profiles matching specific regional structural load tolerances for ministerial facilities.",
+      fr: "Livraison de cornières en L précises et de profilés en acier renforcé correspondant aux tolérances de charge structurelle régionales spécifiques pour les installations ministérielles."
+    }
   }
 ];
 
 export default function ProjectsPage() {
+  const { t, language } = useLanguage(); // Extracting active localization metrics
   const [activeFilter, setActiveFilter] = useState<string>("All");
   const [selectedProject, setSelectedProject] = useState<ProjectType | null>(null);
 
+  // Type-safe locale fallback assessment variable
+  const activeLocale = (language === "fr" ? "fr" : "en") as "en" | "fr";
+
+  // Dynamic filter lists keys mapping translation tokens
   const filters = ["All", "Commercial", "Industrial", "Infrastructure"];
 
   const filteredProjects = activeFilter === "All"
@@ -60,13 +98,16 @@ export default function ProjectsPage() {
       <div className="bg-[#2B2B2B] text-white py-20 px-6 border-b-4 border-[#FFCC29]">
         <div className="max-w-7xl mx-auto w-full">
           <span className="text-xs font-black uppercase tracking-[0.3em] text-[#FFCC29] block mb-3">
-            Proven Infrastructure
+            {activeLocale === "fr" ? "Infrastructure Éprouvée" : "Proven Infrastructure"}
           </span>
           <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-            Our <span className="text-[#FFCC29]">Projects</span>
+            {activeLocale === "fr" ? <>Nos <span className="text-[#FFCC29]">Projets</span></> : <>Our <span className="text-[#FFCC29]">Projects</span></>}
           </h1>
           <p className="text-gray-400 text-sm md:text-base mt-3 max-w-2xl font-medium leading-relaxed">
-            A comprehensive track record of precision-engineered steel profile applications across critical structural builds in the CEMAC region.
+            {activeLocale === "fr" 
+              ? "Un historique complet d'applications de profilés en acier de précision à travers des constructions structurelles critiques dans la zone CEMAC."
+              : "A comprehensive track record of precision-engineered steel profile applications across critical structural builds in the CEMAC region."
+            }
           </p>
         </div>
       </div>
@@ -75,7 +116,7 @@ export default function ProjectsPage() {
       <div className="bg-[#F6F6F6] border-b border-gray-200 py-6 px-6">
         <div className="max-w-7xl mx-auto w-full flex flex-wrap gap-3 items-center">
           <span className="text-xs font-black uppercase tracking-widest text-gray-500 mr-2">
-            Sector Filter:
+            {activeLocale === "fr" ? "Filtrer par Secteur:" : "Sector Filter:"}
           </span>
           {filters.map((filter) => (
             <button
@@ -87,7 +128,7 @@ export default function ProjectsPage() {
                   : "bg-white text-gray-700 border-gray-200 hover:border-black hover:text-black"
               }`}
             >
-              {filter}
+              {filter === "All" ? (activeLocale === "fr" ? "Tous" : "All") : filter}
             </button>
           ))}
         </div>
@@ -112,7 +153,7 @@ export default function ProjectsPage() {
                   <div className="relative aspect-16/11 w-full overflow-hidden bg-gray-100 border-b-2 border-black">
                     <Image
                       src={project.image}
-                      alt={project.title}
+                      alt={project.title[activeLocale]}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -131,11 +172,11 @@ export default function ProjectsPage() {
                     </div>
 
                     <h3 className="text-xl font-black uppercase tracking-tight text-gray-900 mb-4 leading-tight group-hover:text-[#FFCC29] transition-colors">
-                      {project.title}
+                      {project.title[activeLocale]}
                     </h3>
 
                     <p className="text-sm text-gray-600 font-medium leading-relaxed">
-                      {project.scope}
+                      {project.scope[activeLocale]}
                     </p>
                   </div>
                 </div>
@@ -146,7 +187,7 @@ export default function ProjectsPage() {
                     onClick={() => setSelectedProject(project)}
                     className="w-full flex items-center justify-between bg-gray-50 hover:bg-black group-hover:bg-[#FFCC29] text-black p-4 border border-black transition-all font-bold text-xs uppercase tracking-wider"
                   >
-                    <span>View Project Specifications</span>
+                    <span>{activeLocale === "fr" ? "Voir Spécifications Techniques" : "View Project Specifications"}</span>
                     <ArrowUpRight size={16} className="text-gray-500 group-hover:text-black transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </button>
                 </div>
@@ -190,7 +231,7 @@ export default function ProjectsPage() {
                 <div className="relative aspect-4/3 w-full bg-gray-100 border-2 border-black">
                   <Image
                     src={selectedProject.image}
-                    alt={selectedProject.title}
+                    alt={selectedProject.title[activeLocale]}
                     fill
                     className="object-cover"
                     sizes="400px"
@@ -201,25 +242,35 @@ export default function ProjectsPage() {
                 <div className="flex flex-col justify-between">
                   <div className="space-y-4">
                     <span className="text-[10px] bg-black text-[#FFCC29] px-3 py-1 font-black uppercase tracking-widest inline-block border border-black">
-                      {selectedProject.sector} Infrastructure
+                      {selectedProject.sector} {activeLocale === "fr" ? "Infrastructure" : "Infrastructure"}
                     </span>
                     <h2 className="text-2xl md:text-3xl font-black uppercase text-gray-900 tracking-tighter leading-none">
-                      {selectedProject.title}
+                      {selectedProject.title[activeLocale]}
                     </h2>
                     
                     <div className="space-y-2 border-t border-b border-gray-100 py-3 text-xs font-bold text-gray-500 uppercase tracking-wide">
-                      <div className="flex items-center gap-2"><MapPin size={14} /> Location: <span className="text-black ml-1">{selectedProject.location}</span></div>
-                      <div className="flex items-center gap-2"><Building2 size={14} /> Category: <span className="text-black ml-1">{selectedProject.sector} Development</span></div>
+                      <div className="flex items-center gap-2">
+                        <MapPin size={14} /> {activeLocale === "fr" ? "Emplacement:" : "Location:"} 
+                        <span className="text-black ml-1">{selectedProject.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Building2 size={14} /> {activeLocale === "fr" ? "Catégorie:" : "Category:"} 
+                        <span className="text-black ml-1">{selectedProject.sector} {activeLocale === "fr" ? "Développement" : "Development"}</span>
+                      </div>
                     </div>
 
                     <p className="text-gray-600 text-sm leading-relaxed pt-2">
-                      {selectedProject.details}
+                      {selectedProject.details[activeLocale]}
                     </p>
                   </div>
 
                   <div className="mt-6 bg-[#F6F6F6] p-4 border-l-4 border-black text-xs font-semibold text-gray-600 flex items-center gap-3">
                     <Layers size={18} className="text-[#FFCC29] shrink-0" />
-                    <span>Profiles used meet high-tensile galvanization standard specs.</span>
+                    <span>
+                      {activeLocale === "fr" 
+                        ? "Les profilés utilisés répondent aux spécifications standard de galvanisation à haute résistance." 
+                        : "Profiles used meet high-tensile galvanization standard specs."}
+                    </span>
                   </div>
                 </div>
               </div>

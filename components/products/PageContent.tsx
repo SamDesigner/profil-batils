@@ -92,10 +92,10 @@ export default function PageContent() {
       <div className="bg-[#2B2B2B] text-white py-16 px-6 border-b-4 border-[#FFCC29]">
         <div className="max-w-7xl mx-auto w-full lg:px-12">
           <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter">
-            Technical <span className="text-[#FFCC29]">Catalog</span>
+            {t('products.page.title')} <span className="text-[#FFCC29]">{t('products.page.titleHighlight')}</span>
           </h1>
           <p className="text-gray-400 text-sm md:text-base mt-2 max-w-xl font-medium">
-            Precision-engineered galvanized steel profiles compliant with global structural construction standards.
+            {t('products.page.description')}
           </p>
         </div>
       </div>
@@ -108,24 +108,32 @@ export default function PageContent() {
           <aside className="w-full lg:w-64 shrink-0 lg:sticky lg:top-24 bg-[#FBFBFB] border-2 border-black p-6">
             <div className="flex items-center gap-2 mb-6 border-b-2 border-black pb-3">
               <SlidersHorizontal size={18} />
-              <h2 className="text-xs font-black uppercase tracking-widest text-black">Filter Profiles</h2>
+              <h2 className="text-xs font-black uppercase tracking-widest text-black">{t('products.filter.label')}</h2>
             </div>
             
             <ul className="space-y-2">
-              {categories.map((cat) => (
-                <li key={cat}>
-                  <button
-                    onClick={() => setActiveCategory(cat)}
-                    className={`w-full text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all border ${
-                      activeCategory === cat
-                        ? "bg-black text-[#FFCC29] border-black translate-x-2"
-                        : "text-gray-600 border-transparent hover:bg-gray-100 hover:text-black"
-                    }`}
-                  >
-                    {cat} Systems
-                  </button>
-                </li>
-              ))}
+              {categories.map((cat) => {
+                let translatedCat = cat;
+                if (cat === 'All') translatedCat = t('products.category.all');
+                else if (cat === 'Partition') translatedCat = t('products.category.partition');
+                else if (cat === 'Ceiling') translatedCat = t('products.category.ceiling');
+                else if (cat === 'Cladding') translatedCat = t('products.category.cladding');
+                
+                return (
+                  <li key={cat}>
+                    <button
+                      onClick={() => setActiveCategory(cat)}
+                      className={`w-full text-left px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all border ${
+                        activeCategory === cat
+                          ? "bg-black text-[#FFCC29] border-black translate-x-2"
+                          : "text-gray-600 border-transparent hover:bg-gray-100 hover:text-black"
+                      }`}
+                    >
+                      {translatedCat} {cat !== 'All' && t('products.category.systems')}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </aside>
 
@@ -189,7 +197,7 @@ export default function PageContent() {
                             className="flex-1 flex items-center justify-center gap-2 bg-[#333333] hover:bg-black text-white py-3 px-4 rounded-lg font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
                           >
                             <Eye size={16} />
-                            Quick Spec
+                            {t('products.action.quickSpec')}
                           </button>
 
                           {/* DYNAMIC LANGUAGE ANCHOR PROTOCOL */}
@@ -197,7 +205,7 @@ export default function PageContent() {
                             href={targetedDownloadUrl}
                             download={`${product.name.replace(/\s+/g, "_")}_${activeLocale.toUpperCase()}_Specification`}
                             className="flex items-center justify-center bg-gray-100 hover:bg-[#FFCC29] hover:text-black border border-gray-200 p-3 rounded-lg text-gray-700 transition-all cursor-pointer"
-                            title={language === "fr" ? "Télécharger la fiche technique" : "Download technical asset"}
+                            title={t('products.action.downloadAsset')}
                           >
                             <FileText size={16} />
                           </a>

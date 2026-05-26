@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Send, MessageSquare, Loader2, Clock } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ContactPage() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -27,18 +29,18 @@ export default function ContactPage() {
 
     // Client-Side Fields Validation 
     if (!formData.fullName.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setFormError("All required specification details must be completed before transmission.");
+      setFormError(t('contact.formValidationAll'));
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setFormError("Please enter a valid corporate email address.");
+      setFormError(t('contact.formValidationEmail'));
       return;
     }
 
     if (formData.message.trim().length < 10) {
-      setFormError("Please provide a more detailed project quantity description (min. 10 characters).");
+      setFormError(t('contact.formValidationMessage'));
       return;
     }
 
@@ -73,13 +75,13 @@ export default function ContactPage() {
       <div className="bg-[#2B2B2B] text-white py-20 px-6 border-b-4 border-[#FFCC29]">
         <div className="max-w-7xl mx-auto w-full">
           <span className="text-xs font-black uppercase tracking-[0.3em] text-[#FFCC29] block mb-3">
-            Direct Procurement
+            {t('contact.directProcurement')}
           </span>
           <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-            Contact <span className="text-[#FFCC29]">Us</span>
+            {t('contact.contactUs')}
           </h1>
           <p className="text-gray-400 text-sm md:text-base mt-3 max-w-2xl font-medium leading-relaxed">
-            Submit your construction project specs below to route your bill of quantities or custom framing request directly to our commercial office desk via WhatsApp.
+            {t('contact.heroDescription')}
           </p>
         </div>
       </div>
@@ -92,10 +94,10 @@ export default function ContactPage() {
           <div className="w-full lg:w-5/12 space-y-8">
             <div>
               <h2 className="text-2xl font-black uppercase tracking-tight text-gray-900 mb-4">
-                Headquarters Office
+                {t('contact.headquartersOffice')}
               </h2>
               <p className="text-gray-600 text-sm md:text-base leading-relaxed font-medium">
-                Our local manufacturing units and administrative hubs remain positioned to facilitate rapid submittal processing across central logistical corridors.
+                {t('contact.officeDescription')}
               </p>
             </div>
 
@@ -106,7 +108,7 @@ export default function ContactPage() {
                   <Phone size={20} />
                 </div>
                 <div>
-                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Calling Desk</span>
+                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">{t('contact.callingDesk')}</span>
                   <a href="tel:+237640191919" className="font-bold text-base hover:underline">
                     +237 6 90 12 11 35
                   </a>
@@ -119,9 +121,9 @@ export default function ContactPage() {
                   <Clock size={20} />
                 </div>
                 <div>
-                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Availability Window</span>
-                  <span className="font-bold text-sm block text-gray-900 mt-0.5">Mon - Fri: 8:00 AM – 4:30 PM</span>
-                  <span className="font-bold text-sm block text-gray-500">Saturday: 9:00 AM – 1:00 PM</span>
+                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">{t('contact.availabilityWindow')}</span>
+                  <span className="font-bold text-sm block text-gray-900 mt-0.5">{t('contact.hours')}</span>
+                  <span className="font-bold text-sm block text-gray-500">{t('contact.saturdayHours')}</span>
                 </div>
               </div>
 
@@ -131,7 +133,7 @@ export default function ContactPage() {
                   <Mail size={20} />
                 </div>
                 <div>
-                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Email Submittals</span>
+                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">{t('contact.emailSubmittals')}</span>
                   <span className="font-bold text-base">info@batiprofils.net</span>
                 </div>
               </div>
@@ -142,7 +144,7 @@ export default function ContactPage() {
                   <MapPin size={20} />
                 </div>
                 <div>
-                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">Plant Location</span>
+                  <span className="block text-gray-400 text-[10px] font-black uppercase tracking-widest">{t('contact.plantLocation')}</span>
                   <span className="font-bold text-base leading-relaxed">
                     Rue prince de Galles Akwa,<br />Douala - Cameroun
                   </span>
@@ -177,7 +179,7 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-2">
-                    Full Name / Company Name
+                    {t('contact.formFullName')}
                   </label>
                   <input
                     type="text"
@@ -192,7 +194,7 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-2">
-                    Corporate Email Address
+                    {t('contact.formEmail')}
                   </label>
                   <input
                     type="email"
@@ -208,7 +210,7 @@ export default function ContactPage() {
 
               <div>
                 <label className="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-2">
-                  Primary Profile Focus System
+                  {t('contact.formProjectType')}
                 </label>
                 <select
                   name="projectType"
@@ -226,7 +228,7 @@ export default function ContactPage() {
 
               <div>
                 <label className="block text-[11px] font-black uppercase tracking-wider text-gray-500 mb-2">
-                  Project Quantities & Specifications
+                  {t('contact.formMessage')}
                 </label>
                 <textarea
                   name="message"
@@ -247,7 +249,7 @@ export default function ContactPage() {
                 >
                   {isSubmitting ? (
                     <>
-                      <span>Routing Submittals</span>
+                      <span>{t('contact.formSubmit')}</span>
                       <Loader2 size={14} className="animate-spin text-[#FFCC29]" />
                     </>
                   ) : (

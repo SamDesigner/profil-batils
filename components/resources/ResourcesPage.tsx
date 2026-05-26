@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Download, FileText, Search, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext"; // Hook injection
 
 interface ResourceType {
   id: string;
@@ -172,24 +173,34 @@ const DOWNLOADABLE_RESOURCES: ResourceType[] = [
   },
 ];
 
-type LangType = "all" | "en" | "fr";
+type FilterLangType = "all" | "en" | "fr";
 
 export default function ResourcesPage() {
+  const { language } = useLanguage(); // Connected to global toggle system
+  const isFrench = language === "fr";
+
   const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [currentLang, setCurrentLang] = useState<LangType>("all");
+  const [currentLang, setCurrentLang] = useState<FilterLangType>("all");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const categories = ["All", "Catalogues", "Technical Data", "Certificates", "Guides"];
-  const languages: { value: LangType; label: string }[] = [
-    { value: "all", label: "ALL" },
+  // Structural dynamic categoric value arrays mapping labels
+  const categories = [
+    { value: "All", en: "All Documents", fr: "Tous les Documents" },
+    { value: "Catalogues", en: "Catalogues", fr: "Catalogues" },
+    { value: "Technical Data", en: "Technical Data", fr: "Données Techniques" },
+    { value: "Certificates", en: "Certificates", fr: "Certificats" },
+    { value: "Guides", en: "Guides", fr: "Guides" }
+  ];
+
+  const languages: { value: FilterLangType; label: string }[] = [
+    { value: "all", label: isFrench ? "TOUS" : "ALL" },
     { value: "en", label: "EN" },
     { value: "fr", label: "FR" },
   ];
 
-  // Close dropdown if user clicks outside of it
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -201,7 +212,8 @@ export default function ResourcesPage() {
   }, []);
 
   const filteredResources = DOWNLOADABLE_RESOURCES.filter((item) => {
-    const matchesLanguage = currentLang === "all" || item.lang === currentLang;
+    // 1. Matches targeted language context (either manual catalog filter or context syncing default)
+    const matchesLanguage = currentLang === "all" ? item.lang === language : item.lang === currentLang;
     const matchesCategory = activeCategory === "All" || item.category === activeCategory;
     const matchesSearch =
       item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -210,7 +222,7 @@ export default function ResourcesPage() {
     return matchesLanguage && matchesCategory && matchesSearch;
   });
 
-  const activeLangLabel = languages.find((l) => l.value === currentLang)?.label || "ALL";
+  const activeLangLabel = languages.find((l) => l.value === currentLang)?.label || (isFrench ? "TOUS" : "ALL");
 
   return (
     <main className="bg-white min-h-screen font-sans">
@@ -218,17 +230,17 @@ export default function ResourcesPage() {
       <div className="bg-[#2B2B2B] text-white py-20 px-6 border-b-4 border-[#FFCC29]">
         <div className="max-w-7xl mx-auto w-full">
           <span className="text-xs font-black uppercase tracking-[0.3em] text-[#FFCC29] block mb-3">
-            {currentLang === "fr" ? "Soumissions Techniques" : "Technical Submittals"}
+            {isFrench ? "Soumissions Techniques" : "Technical Submittals"}
           </span>
           <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter">
-            {currentLang === "fr" ? (
+            {isFrench ? (
               <>Ressources <span className="text-[#FFCC29]">Techniques</span></>
             ) : (
               <>Technical <span className="text-[#FFCC29]">Resources</span></>
             )}
           </h1>
           <p className="text-gray-400 text-sm md:text-base mt-3 max-w-2xl font-medium leading-relaxed">
-            {currentLang === "fr" 
+            {isFrench 
               ? "Accédez et téléchargez les fiches techniques structurelles, les documentations de conception, les registres de conformité et les manuels de configuration."
               : "Access and download structural data sheets, architectural design assets, compliance records, and configuration manuals for submittal approvals."}
           </p>
@@ -243,15 +255,15 @@ export default function ResourcesPage() {
           <div className="flex gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
             {categories.map((cat) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={cat.value}
+                onClick={() => setActiveCategory(cat.value)}
                 className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all border-2 whitespace-nowrap ${
-                  activeCategory === cat
+                  activeCategory === cat.value
                     ? "bg-black text-[#FFCC29] border-black shadow-[4px_4px_0px_rgba(255,204,41,1)]"
                     : "bg-white text-gray-700 border-gray-200 hover:border-black hover:text-black"
                 }`}
               >
-                {cat === "All" ? (currentLang === "fr" ? "Tous les Documents" : "All Documents") : cat}
+                {isFrench ? cat.fr : cat.en}
               </button>
             ))}
           </div>
@@ -260,7 +272,7 @@ export default function ResourcesPage() {
           <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto items-center">
             
             {/* Custom Dropdown Container */}
-            <div className="relative w-full sm:w-32 ref={dropdownRef}">
+            <div className="relative w-full sm:w-32" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
                 className="w-full flex items-center justify-between bg-white border-2 border-black px-4 py-2.5 text-xs font-black tracking-wider transition-all hover:bg-[#FFFDF3] active:translate-y-0.5"
@@ -303,7 +315,7 @@ export default function ResourcesPage() {
             <div className="relative w-full sm:w-80">
               <input
                 type="text"
-                placeholder={currentLang === "fr" ? "Rechercher des documents..." : "Search documentation files..."}
+                placeholder={isFrench ? "Rechercher des documents..." : "Search documentation files..."}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-white border-2 border-gray-200 px-4 py-2.5 pl-10 text-sm font-medium focus:outline-none focus:border-black transition-colors rounded-none"
@@ -323,6 +335,11 @@ export default function ResourcesPage() {
               const isPdf = item.fileType.toUpperCase() === "PDF";
               const fileExtension = isPdf ? "pdf" : "png";
 
+              // Clean internal loop translations for structural cards metrics
+              const translatedCategory = categories.find(c => c.value === item.category);
+              const visibleCategory = translatedCategory ? (isFrench ? translatedCategory.fr : translatedCategory.en) : item.category;
+              const assetFileType = item.fileType === "IMAGE FILE" && isFrench ? "FICHIER IMAGE" : item.fileType;
+
               return (
                 <motion.div
                   layout
@@ -337,11 +354,11 @@ export default function ResourcesPage() {
                     {/* Card Meta Header */}
                     <div className="flex items-center justify-between mb-4">
                       <span className="text-[10px] font-black uppercase tracking-widest bg-black text-[#FFCC29] px-2.5 py-1 border border-black">
-                        {item.category}
+                        {visibleCategory}
                       </span>
                       <div className="flex items-center gap-2">
                         <span className="text-[9px] font-black uppercase bg-gray-200 px-1.5 py-0.5 text-gray-700">
-                          {item.lang}
+                          {item.lang.toUpperCase()}
                         </span>
                         <span className="text-[11px] font-bold text-gray-400 uppercase">
                           {item.date}
@@ -368,7 +385,7 @@ export default function ResourcesPage() {
                   {/* Submittal Action Bar */}
                   <div className="pt-4 border-t border-gray-100 flex items-center justify-between pl-0 md:pl-14">
                     <span className="text-xs font-black text-gray-400 uppercase tracking-wider">
-                      {item.fileType} / {item.fileSize}
+                      {assetFileType} / {item.fileSize}
                     </span>
 
                     {/* NATIVE LINK INTERFACE SEGMENT */}
@@ -378,7 +395,7 @@ export default function ResourcesPage() {
                       className="flex items-center gap-2 bg-black text-[#FFCC29] px-5 py-3 font-bold text-xs uppercase tracking-wider border border-black hover:bg-[#FFCC29] hover:text-black transition-colors shadow-sm cursor-pointer"
                     >
                       <Download size={14} />
-                      {item.lang === "fr" ? "Télécharger l'élément" : "Download Asset"}
+                      {isFrench ? "Télécharger" : "Download Asset"}
                     </a>
                   </div>
                 </motion.div>
@@ -391,7 +408,7 @@ export default function ResourcesPage() {
         {filteredResources.length === 0 && (
           <div className="text-center py-24 border-2 border-dashed border-gray-200">
             <p className="text-gray-400 font-bold text-sm uppercase tracking-wider">
-              {currentLang === "fr" 
+              {isFrench 
                 ? "Aucune documentation technique ne correspond aux paramètres de recherche."
                 : "No technical documentation matching search parameters found."}
             </p>

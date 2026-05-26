@@ -1,9 +1,8 @@
 "use client";
-// import React from "react";
-// import { MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import WhatsApp from '@/public/images/whatsapp.png';
 import Image from "next/image";
+import { useLanguage } from "@/context/LanguageContext";
 export default function FloatingWhatsApp() {
   const WHATSAPP_NUMBER = "237640191919"; // Format: Country code + number without zeros or plus signs
 

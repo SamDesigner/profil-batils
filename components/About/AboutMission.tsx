@@ -1,18 +1,21 @@
 "use client";
 import React from "react";
 import { Target, Eye } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function MissionVision() {
+  const { t } = useLanguage();
+  
   const cards = [
     {
-      title: "Our Mission",
+      title: t('about.mission.title'),
       icon: <Target className="text-[#FFCC29]" size={32} />,
-      text: "To provide high-performance drywall systems that simplify construction without compromising on structural integrity, ensuring every build in the CEMAC region stands on a foundation of excellence.",
+      text: t('about.mission.text'),
     },
     {
-      title: "Our Vision",
+      title: t('about.vision.title'),
       icon: <Eye className="text-[#FFCC29]" size={32} />,
-      text: "To be the standard-bearer for industrial manufacturing across Central Africa, driving innovation in steel profile engineering and sustainable urban development.",
+      text: t('about.vision.text'),
     },
   ];
 
