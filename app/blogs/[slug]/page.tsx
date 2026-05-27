@@ -1,10 +1,9 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import { Calendar, User, ArrowLeft, ShieldCheck } from "lucide-react";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsapp";
+
 interface BlogType {
   id: string;
   title: string;
@@ -16,7 +15,6 @@ interface BlogType {
   slug: string;
 }
 
-// Simulated Database Content
 const BLOGS_DATA: Record<string, BlogType> = {
   "optimizing-acoustic-ratings": {
     id: "post-1",
@@ -50,12 +48,13 @@ const BLOGS_DATA: Record<string, BlogType> = {
   }
 };
 
-export default function BlogDetailPage() {
-  const params = useParams();
-  const slug = params?.slug as string;
-  const post = BLOGS_DATA[slug];
+// 1. Marked the component function as async
+export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  
+  // 2. Await the incoming params to unwrap the slug string safely
+  const resolvedParams = await params;
+  const post = BLOGS_DATA[resolvedParams.slug];
 
-  // Fallback if the slug doesn't exist in the data
   if (!post) {
     return (
       <main className="min-h-screen bg-white flex flex-col items-center justify-center p-6 font-sans">
@@ -68,8 +67,7 @@ export default function BlogDetailPage() {
   }
 
   return (
-    // pb-24
-    <main className="bg-white min-h-screen font-sans ">
+    <main className="bg-white min-h-screen font-sans">
       {/* HEADER META STRIP */}
       <div className="border-b border-gray-200 py-6 px-6 bg-[#F6F6F6]">
         <div className="max-w-4xl mx-auto w-full flex items-center justify-between">
@@ -134,4 +132,10 @@ export default function BlogDetailPage() {
       <FloatingWhatsApp />
     </main>
   );
+}
+
+export async function generateStaticParams() {
+  return Object.keys(BLOGS_DATA).map((slug) => ({
+    slug: slug,
+  }));
 }

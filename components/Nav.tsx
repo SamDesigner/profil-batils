@@ -26,6 +26,7 @@ const Nav = () => {
     <nav className="relative w-full bg-white z-100 border-b border-gray-100 font-sans">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 lg:px-12 py-4">
 
+        {/* LOGO */}
         <div className="relative w-32 h-12 md:w-40 md:h-14">
           <Link href="/">
             <Image
@@ -39,6 +40,7 @@ const Nav = () => {
           </Link>
         </div>
 
+        {/* DESKTOP LINKS */}
         <ul className="hidden lg:flex items-center gap-8">
           {Links.map((link, index) => {
             const isActive = pathname === link.link;
@@ -62,6 +64,7 @@ const Nav = () => {
           })}
         </ul>
 
+        {/* DESKTOP ACTIONS */}
         <div className="hidden lg:flex items-center gap-4">
           <LanguageToggle />
           <Link href="/contact">
@@ -69,17 +72,21 @@ const Nav = () => {
               {t('nav.getInTouch')}
             </button>
           </Link>
-
         </div>
 
-        <button
-          className="lg:hidden text-black p-2"
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+        {/* MOBILE INTERFACE: Always shows LanguageToggle right next to the menu icon */}
+        <div className="flex lg:hidden items-center gap-4">
+          <LanguageToggle />
+          <button
+            className="text-black p-2"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </div>
 
+      {/* MOBILE EXPANDED MENU */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -104,10 +111,12 @@ const Nav = () => {
                 );
               })}
               <li className="pt-4 flex gap-4">
-                <LanguageToggle />
-                <button className="flex-1 bg-black text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm">
-                  {t('nav.getInTouch')}
-                </button>
+                {/* Removed LanguageToggle from here so it isn't duplicated */}
+                <Link href="/contact" className="w-full" onClick={() => setIsOpen(false)}>
+                  <button className="w-full bg-black text-white py-4 rounded-xl font-bold uppercase tracking-widest text-sm">
+                    {t('nav.getInTouch')}
+                  </button>
+                </Link>
               </li>
             </ul>
           </motion.div>
